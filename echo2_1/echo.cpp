@@ -7,7 +7,7 @@ using namespace std;
 #include <windows.h>
 #include <process.h>
 
-int main( int argc, char* argv[] ) 
+int main( int argc, char* argv[] )
 {
 	if( argc < 2 )
 	{
@@ -15,17 +15,17 @@ int main( int argc, char* argv[] )
 		return 0;
 	}
 
-	//¼ÒÄÏ °´Ã¼ »ý¼º
+	//ì†Œì¼“ ê°ì²´ ìƒì„±
 	cSocket Socket;
 
-	//echo ¼­¹ö·Î ½ÃÀÛ
+	//echo ì„œë²„ë¡œ ì‹œìž‘
 	if( strcmpi( argv[ 1 ] , "/server" ) == 0 )
 	{
 		Socket.InitSocket();
 		Socket.BindandListen( SERVER_PORT );
 		Socket.StartServer();
 	}
-	//echo Å¬¶óÀÌ¾ðÆ®·Î ½ÃÀÛ
+	//echo í´ë¼ì´ì–¸íŠ¸ë¡œ ì‹œìž‘
 	else if( strcmpi( argv[ 1 ] , "/client" ) == 0 )
 	{
 		Socket.InitSocket();
