@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "../NpcServer/cFsm.h"
 class cNpc
 {
@@ -21,7 +21,7 @@ public:
 	inline void		SetState( eState State ) { m_eState = State; }
 	inline eState	GetState() { return m_eState; }
 protected:
-	//NPCÁ¾·ù
+	//NPCì¢…ë¥˜
 	eNpcType	m_eNpcType;
 	DWORD		m_dwCPos;
 	DWORD		m_dwTPos;

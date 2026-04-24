@@ -1,4 +1,4 @@
-#include "precompile.h"
+Ôªø#include "precompile.h"
 #include "cThread.h"
 #include "cLog.h"
 
@@ -33,7 +33,7 @@ bool cThread::CreateThread( DWORD dwWaitTick )
 		                          , CREATE_SUSPENDED , &uiThreadId);
 	if(m_hThread == NULL)
 	{
-		LOG( LOG_ERROR_NORMAL , " SYSTEM | cThread::CreateTickThread() | TickThread ª˝º∫ Ω«∆– : Error(%u) "
+		LOG( LOG_ERROR_NORMAL , " SYSTEM | cThread::CreateTickThread() | TickThread ÏÉùÏÑ± Ïã§Ìå® : Error(%u) "
 			, GetLastError() );	
 		return false;
 	}

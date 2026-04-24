@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+﻿#include "StdAfx.h"
 #include ".\cnormalnpc.h"
 
 cNormalNpc::cNormalNpc(void)

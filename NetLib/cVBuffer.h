@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class NETLIB_API cVBuffer :  public cSingleton
 {
 	DECLEAR_SINGLETON( cVBuffer );
@@ -29,11 +29,11 @@ public:
 	 
 private:
 
-	char* m_pszVBuffer;		//½ÇÁ¦ ¹öÆÛ
-	char* m_pCurMark;		//ÇöÀç ¹öÆÛ À§Ä¡
+	char* m_pszVBuffer;		//ì‹¤ì œ ë²„í¼
+	char* m_pCurMark;		//í˜„ì¬ ë²„í¼ ìœ„ì¹˜
 
-	int	m_nMaxBufSize;		//ÃÖ´ë ¹öÆÛ »çÀÌÁî
-	int m_nCurBufSize;		//ÇöÀç »ç¿ëµÈ ¹öÆÛ »çÀÌÁî
+	int	m_nMaxBufSize;		//ìµœëŒ€ ë²„í¼ ì‚¬ì´ì¦ˆ
+	int m_nCurBufSize;		//í˜„ì¬ ì‚¬ìš©ëœ ë²„í¼ ì‚¬ì´ì¦ˆ
 
 	cVBuffer(const cVBuffer &rhs);
     cVBuffer &operator=(const cVBuffer &rhs);

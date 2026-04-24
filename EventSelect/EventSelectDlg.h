@@ -1,31 +1,31 @@
-// EventSelectDlg.h : Çì´õ ÆÄÀÏ
+ï»¿// EventSelectDlg.h : í—¤ë” íŒŒì¼
 //
 
 #pragma once
 #include "afxwin.h"
 #include "cEventSelect.h"
 #include "resource.h"
-// CEventSelectDlg ´ëÈ­ »óÀÚ
+// CEventSelectDlg ëŒ€í™” ìƒì
 class CEventSelectDlg : public CDialog
 {
-// »ı¼º
+// ìƒì„±
 public:
-	CEventSelectDlg(CWnd* pParent = NULL);	// Ç¥ÁØ »ı¼ºÀÚ
+	CEventSelectDlg(CWnd* pParent = NULL);	// í‘œì¤€ ìƒì„±ì
 
-// ´ëÈ­ »óÀÚ µ¥ÀÌÅÍ
+// ëŒ€í™” ìƒì ë°ì´í„°
 	enum { IDD = IDD_EVENTSELECT_DIALOG };
 
 	void OutputMsg( char *szOutputString , ... );
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV Áö¿ø
+	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV ì§€ì›
 	
 
-// ±¸Çö
+// êµ¬í˜„
 protected:
 	HICON m_hIcon;
 
-	// ¸Ş½ÃÁö ¸Ê ÇÔ¼ö¸¦ »ı¼ºÇß½À´Ï´Ù.
+	// ë©”ì‹œì§€ ë§µ í•¨ìˆ˜ë¥¼ ìƒì„±í–ˆìŠµë‹ˆë‹¤.
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();

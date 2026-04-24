@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+ï»¿#include "StdAfx.h"
 #include ".\ciocpgameserver.h"
 #include "cProcessPacket.h"
 #define BASE_SERVER "BASE_SERVER"
@@ -30,31 +30,31 @@ cIocpGameServer::~cIocpGameServer(void)
 }
 void cIocpGameServer::InitProcessFunc()
 {
-	//Å¬¶óÀÌ¾ğÆ®¿¡¼­ ¹ŞÀº ÆĞÅ¶
+	//í´ë¼ì´ì–¸íŠ¸ì—ì„œ ë°›ì€ íŒ¨í‚·
 	m_FuncProcess[ LoginPlayer_Rq ].funcProcessPacket = cProcessPacket::fnLoginPlayerRq;
 	m_FuncProcess[ MovePlayer_Cn ].funcProcessPacket = cProcessPacket::fnMovePlayerCn;
 	m_FuncProcess[ KeepAlive_Cn ].funcProcessPacket = cProcessPacket::fnKeepAliveCn;
 
-	//NPC¼­¹ö¿¡¼­ ¹ŞÀº ÆĞÅ¶
+	//NPCì„œë²„ì—ì„œ ë°›ì€ íŒ¨í‚·
 	m_FuncProcess[ NPC_NpcInfo_VSn ].funcProcessPacket = cProcessPacket::fnNPCNpcInfoVSn;
 	m_FuncProcess[ NPC_UpdateNpc_VSn ].funcProcessPacket = cProcessPacket::fnNPCUpdateNpcVSn;
 	m_FuncProcess[ NPC_AttackNpcToPlayer_Sn ].funcProcessPacket = cProcessPacket::fnNPCAttackNpcToPlayerSn;
 			
 }
-//client°¡ Á¢¼Ó ¼ö¶ôÀÌ µÇ¾úÀ» ¶§ È£ÃâµÇ´Â ÇÔ¼ö
+//clientê°€ ì ‘ì† ìˆ˜ë½ì´ ë˜ì—ˆì„ ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
 bool cIocpGameServer::OnAccept( cConnection *lpConnection )
 {
 	cPlayer* pPlayer = (cPlayer*)lpConnection;
 	
 	LOG( LOG_INFO_LOW , 
-		"SYSTEM | cIocpGameServer::OnAccept() | IP[%s] Socket[%d] Á¢¼Ó PlayerCnt[%d]",
+		"SYSTEM | cIocpGameServer::OnAccept() | IP[%s] Socket[%d] ì ‘ì† PlayerCnt[%d]",
 		lpConnection->GetConnectionIp(), lpConnection->GetSocket() ,
 		PlayerManager()->GetPlayerCnt() );
 
 	return true;
 }
 
-//client¿¡¼­ packetÀÌ µµÂøÇßÀ» ¶§ ¼ø¼­ ¼º ÀÖ°Ô Ã³¸®µÇ¾îÁö´Â ÆĞÅ¶Ã³¸®
+//clientì—ì„œ packetì´ ë„ì°©í–ˆì„ ë•Œ ìˆœì„œ ì„± ìˆê²Œ ì²˜ë¦¬ë˜ì–´ì§€ëŠ” íŒ¨í‚·ì²˜ë¦¬
 bool cIocpGameServer::OnRecv(cConnection* lpConnection,  DWORD dwSize , char* pRecvedMsg)
 {
 	unsigned short usType;
@@ -63,7 +63,7 @@ bool cIocpGameServer::OnRecv(cConnection* lpConnection,  DWORD dwSize , char* pR
 	
 	if( usType < 0 || usType > MAX_PROCESSFUNC || NULL == m_FuncProcess[ usType ].funcProcessPacket )
 	{
-		LOG( LOG_ERROR_NORMAL , "SYSTEM | cIocpGameServer::OnRecv() | Á¤ÀÇµÇÁö ¾ÊÀº ÆĞÅ¶(%d)",
+		LOG( LOG_ERROR_NORMAL , "SYSTEM | cIocpGameServer::OnRecv() | ì •ì˜ë˜ì§€ ì•Šì€ íŒ¨í‚·(%d)",
 			usType );
 		return true;
 	}
@@ -71,31 +71,31 @@ bool cIocpGameServer::OnRecv(cConnection* lpConnection,  DWORD dwSize , char* pR
 	return true;
 }
 
-//client¿¡¼­ packetÀÌ µµÂøÇßÀ» ¶§ ¼ø¼­ ¼º ¾øÀÌ °ğ¹Ù·Î Ã³¸® µÇ´Â ÆĞÅ¶Ã³¸®
+//clientì—ì„œ packetì´ ë„ì°©í–ˆì„ ë•Œ ìˆœì„œ ì„± ì—†ì´ ê³§ë°”ë¡œ ì²˜ë¦¬ ë˜ëŠ” íŒ¨í‚·ì²˜ë¦¬
 bool cIocpGameServer::OnRecvImmediately(cConnection* lpConnection,  DWORD dwSize , char* pRecvedMsg)
 {
 	/////////////////////////////////////////////////////////////////
-	//ÆĞÅ¶ÀÌ Ã³¸®µÇ¸é return true; Ã³¸® µÇÁö ¾Ê¾Ò´Ù¸é return false;
+	//íŒ¨í‚·ì´ ì²˜ë¦¬ë˜ë©´ return true; ì²˜ë¦¬ ë˜ì§€ ì•Šì•˜ë‹¤ë©´ return false;
 	return false;
 }
 
-//client¿Í ¿¬°áÀÌ Á¾·áµÇ¾úÀ» ¶§ È£ÃâµÇ´Â ÇÔ¼ö
+//clientì™€ ì—°ê²°ì´ ì¢…ë£Œë˜ì—ˆì„ ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
 void cIocpGameServer::OnClose(cConnection* lpConnection)
 {
 	cPlayer* pPlayer = (cPlayer*)lpConnection;
-	//ÀÎÁõµÈ »ç¿ëÀÚ°¡ ¾Æ´Ï¶ó¸é 
+	//ì¸ì¦ëœ ì‚¬ìš©ìê°€ ì•„ë‹ˆë¼ë©´ 
 	if( pPlayer->GetIsConfirm() == false )
 		return;
 	LOG( LOG_INFO_LOW , 
-		"SYSTEM | cIocpGameServer::OnClose() | IP[%s] Socket[%d] PKey[%d] Id[%s] Á¾·á  PlayerCnt[%d]",
+		"SYSTEM | cIocpGameServer::OnClose() | IP[%s] Socket[%d] PKey[%d] Id[%s] ì¢…ë£Œ  PlayerCnt[%d]",
 		pPlayer->GetConnectionIp(), pPlayer->GetSocket() ,
 		pPlayer->GetPKey(), pPlayer->GetId(),
 		PlayerManager()->GetPlayerCnt() );
-	//ÇÃ·¹ÀÌ¾î¸¦ °ü¸® ¸ñ·Ï¿¡¼­ »èÁ¦ÇÑ´Ù.
+	//í”Œë ˆì´ì–´ë¥¼ ê´€ë¦¬ ëª©ë¡ì—ì„œ ì‚­ì œí•œë‹¤.
 	PlayerManager()->RemovePlayer( pPlayer );
-	//ÇÃ·¹ÀÌ¾î°¡ ·Î±×¾Æ¿ôÇÏ¿´´Ù´Â °ÍÀ» ¿ùµåÀÇ ´Ù¸¥ ÇÃ·¹ÀÌ¾î¿¡°Ô ¾Ë¸°´Ù.
+	//í”Œë ˆì´ì–´ê°€ ë¡œê·¸ì•„ì›ƒí•˜ì˜€ë‹¤ëŠ” ê²ƒì„ ì›”ë“œì˜ ë‹¤ë¥¸ í”Œë ˆì´ì–´ì—ê²Œ ì•Œë¦°ë‹¤.
 	PlayerManager()->Send_LogoutPlayer( pPlayer );
-	//NPC¼­¹ö¿¡ ÇÃ·¹ÀÌ¾î°¡ ·Î±×¾Æ¿ôÇß´Ù´Â °ÍÀ» ¾Ë¸²
+	//NPCì„œë²„ì— í”Œë ˆì´ì–´ê°€ ë¡œê·¸ì•„ì›ƒí–ˆë‹¤ëŠ” ê²ƒì„ ì•Œë¦¼
 	if( NULL == m_pNpcServerConn )
 		return;
 	NPCLogoutPlayerCn* pLogoutPlayer = 
@@ -117,7 +117,7 @@ bool cIocpGameServer::OnSystemMsg( cConnection* lpConnection , DWORD dwMsgType ,
 	{
 	case SYSTEM_TEMPMSG:
 		{
-			//½Ã½ºÅÛ ¸Ş½ÃÁö Ã³¸® ºÎºĞ
+			//ì‹œìŠ¤í…œ ë©”ì‹œì§€ ì²˜ë¦¬ ë¶€ë¶„
 		}
 		break;
 	case SYSTEM_UPDATE_TEMPPLAYERPOS:
@@ -130,28 +130,28 @@ bool cIocpGameServer::OnSystemMsg( cConnection* lpConnection , DWORD dwMsgType ,
 	return true;
 }
 
-//iniÈ­ÀÏ¿¡¼­ ½ºÆ®¸µÀ» ÀĞ¾î¿À´Â ÇÔ¼ö
+//inií™”ì¼ì—ì„œ ìŠ¤íŠ¸ë§ì„ ì½ì–´ì˜¤ëŠ” í•¨ìˆ˜
 int cIocpGameServer::GetINIString( char* szOutStr , char* szAppName , char* szKey ,int nSize , char* szFileName )
 {
 	int ret = GetPrivateProfileString( szAppName  , szKey  , "" , szOutStr , nSize , szFileName);
 	if( 0 == ret )
 	{
 		char szTemp[ 300 ];
-		sprintf( szTemp , "[%s]Config File¿¡ [%s]-[%s]Ç×¸ñÀº Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.", szFileName , szAppName ,szKey );
+		sprintf( szTemp , "[%s]Config Fileì— [%s]-[%s]í•­ëª©ì€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.", szFileName , szAppName ,szKey );
 		AfxMessageBox( szTemp );
 		return -1;
 	}
 	return 0;
 }
 
-//iniÈ­ÀÏ¿¡¼­ ¼ıÀÚ¸¦ ÀĞ¾î¿À´Â ÇÔ¼ö
+//inií™”ì¼ì—ì„œ ìˆ«ìë¥¼ ì½ì–´ì˜¤ëŠ” í•¨ìˆ˜
 int	cIocpGameServer::GetINIInt( char* szAppName , char* szKey , char* szFileName )
 {
 	int ret = GetPrivateProfileInt( szAppName , szKey  , -1 ,  szFileName );
 	if( ret < 0 )
 	{
 		char szTemp[ 300 ];
-		sprintf( szTemp , "[%s]Config File¿¡ [%s]-[%s]Ç×¸ñÀº Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.",
+		sprintf( szTemp , "[%s]Config Fileì— [%s]-[%s]í•­ëª©ì€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.",
 			szFileName , szAppName ,szKey );
 		AfxMessageBox( szTemp );
 	}
@@ -167,7 +167,7 @@ bool cIocpGameServer::ServerStart()
 		return false;
 
 	//////////////////////////////////////////////////////////////////
-	//·Î±× ÃÊ±âÈ­
+	//ë¡œê·¸ ì´ˆê¸°í™”
 	sLogConfig LogConfig;
 	strncpy( LogConfig.s_szLogFileName , m_szLogFileName , MAX_FILENAME_LENGTH );
 	LogConfig.s_nLogInfoTypes[ STORAGE_OUTPUTWND ] = LOG_ALL;
@@ -176,7 +176,7 @@ bool cIocpGameServer::ServerStart()
 	LogConfig.s_hWnd = AfxGetMainWnd()->m_hWnd;
 	INIT_LOG( LogConfig );
 
-	//¼­¹ö Á¤º¸ ÃÊ±âÈ­
+	//ì„œë²„ ì •ë³´ ì´ˆê¸°í™”
 	INITCONFIG initConfig;
 	CString		szLogName;	
 	int nMaxConnectionCnt = 0;
@@ -203,25 +203,25 @@ bool cIocpGameServer::ServerStart()
 		return false;
 	
 	
-	LOG( LOG_INFO_NORMAL , "SYSTEM |  ·Î±× ½Ã½ºÅÛ ½ÃÀÛ | ====================================================================== ");
+	LOG( LOG_INFO_NORMAL , "SYSTEM |  ë¡œê·¸ ì‹œìŠ¤í…œ ì‹œì‘ | ====================================================================== ");
 	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_LogFileName] %s", m_szLogFileName );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Queue] Process Pakcet °³¼ö : %d", initConfig.nProcessPacketCnt );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Buffer] Send Buffer °³¼ö : %d ", initConfig.nSendBufCnt );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Buffer] Recv Buffer °³¼ö : %d ", initConfig.nRecvBufCnt );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Buffer] Send Buffer Å©±â : %d ", initConfig.nSendBufSize );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Buffer] Recv Buffer Å©±â : %d ", initConfig.nRecvBufSize );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Buffer] Send ÃÑ ÇÒ´ç ¹öÆÛ: %d ", initConfig.nSendBufSize * initConfig.nSendBufCnt );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Buffer] Recv ÃÑ ÇÒ´ç ¹öÆÛ: %d ", initConfig.nRecvBufSize * initConfig.nRecvBufCnt );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Connection] Á¢¼ÓÇÒ¼ö ÀÖ´Â ÃÖ´ë ¼ö : %d", nMaxConnectionCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Queue] Process Pakcet ê°œìˆ˜ : %d", initConfig.nProcessPacketCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Buffer] Send Buffer ê°œìˆ˜ : %d ", initConfig.nSendBufCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Buffer] Recv Buffer ê°œìˆ˜ : %d ", initConfig.nRecvBufCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Buffer] Send Buffer í¬ê¸° : %d ", initConfig.nSendBufSize );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Buffer] Recv Buffer í¬ê¸° : %d ", initConfig.nRecvBufSize );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Buffer] Send ì´ í• ë‹¹ ë²„í¼: %d ", initConfig.nSendBufSize * initConfig.nSendBufCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Buffer] Recv ì´ í• ë‹¹ ë²„í¼: %d ", initConfig.nRecvBufSize * initConfig.nRecvBufCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Connection] ì ‘ì†í• ìˆ˜ ìˆëŠ” ìµœëŒ€ ìˆ˜ : %d", nMaxConnectionCnt );
 	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Connection] Server Binding Port : %d", initConfig.nServerPort );
 	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Thread] WorkerThread Cnt : %d", initConfig.nWorkerThreadCnt );
 	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | [Base_Thread] Process WorkerThread Cnt : %d", initConfig.nProcessThreadCnt );
 	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | GameServer Start.." );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | ¼­¹ö ½ÃÀÛ ½Ã°£ :  %d³â%d¿ù%dÀÏ%d½Ã%dºĞ%dÃÊ",
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ServerStart() | ì„œë²„ ì‹œì‘ ì‹œê°„ :  %dë…„%dì›”%dì¼%dì‹œ%dë¶„%dì´ˆ",
 		time.GetYear(),time.GetMonth(),time.GetDay(), time.GetHour(),time.GetMinute(),time.GetSecond() );
 
 	sprintf(szOutStr 
-		,"[%d³â%d¿ù%dÀÏ%d½Ã%dºĞ%dÃÊ] GameServer Start..."
+		,"[%dë…„%dì›”%dì¼%dì‹œ%dë¶„%dì´ˆ] GameServer Start..."
 		,time.GetYear(),time.GetMonth(),time.GetDay(),
 		time.GetHour(),time.GetMinute(),time.GetSecond() );
 
@@ -231,7 +231,7 @@ bool cIocpGameServer::ServerStart()
 	if( false == PlayerManager()->CreatePlayer( initConfig , nMaxConnectionCnt ) )
 		return false;
 	
-	//0.5 tickÀ¸·Î thread ½ÃÀÛ
+	//0.5 tickìœ¼ë¡œ thread ì‹œì‘
 	m_pTickThread->CreateThread( SERVER_TICK );
 	m_pTickThread->Run();
 	return true;
@@ -256,7 +256,7 @@ void cIocpGameServer::ProcessSystemMsg( cPlayer* pPlayer , DWORD dwMsgType , LPA
 
 bool cIocpGameServer::ConnectToNpcServer()
 {
-	//ÀÌ¹Ì µğºñ ¼­¹ö¿Í ¿¬°áÀÌ µÇ¾îÀÖ´Ù¸é Àü¿¡ ¿¬°áÀ» ²÷°í ´Ù½Ã ¿¬°áÇÑ´Ù.
+	//ì´ë¯¸ ë””ë¹„ ì„œë²„ì™€ ì—°ê²°ì´ ë˜ì–´ìˆë‹¤ë©´ ì „ì— ì—°ê²°ì„ ëŠê³  ë‹¤ì‹œ ì—°ê²°í•œë‹¤.
 	if( NULL != m_pNpcServerConn )
 	{
 		CloseConnection( m_pNpcServerConn );
@@ -267,7 +267,7 @@ bool cIocpGameServer::ConnectToNpcServer()
 	INITCONFIG initConfig;
 	char		szIp[30];
 
-	//Á¢¼ÓÇÒ NpcServer¿¡ ´ëÇÑ Á¤º¸¸¦ ¾ò¾î¿Â´Ù.
+	//ì ‘ì†í•  NpcServerì— ëŒ€í•œ ì •ë³´ë¥¼ ì–»ì–´ì˜¨ë‹¤.
 	if( -1 == ( initConfig.nSendBufCnt = GetINIInt( CONNECT_NPCSERVER  , "SEND_BUFFER_CNT"  , INIFILE_NAME ) ) )
 		return false;
 	if( -1 == ( initConfig.nRecvBufCnt = GetINIInt( CONNECT_NPCSERVER  , "RECV_BUFFER_CNT"  , INIFILE_NAME ) ) )
@@ -281,12 +281,12 @@ bool cIocpGameServer::ConnectToNpcServer()
 	if( -1 == ( initConfig.nServerPort = GetINIInt( CONNECT_NPCSERVER  , "CONNECT_PORT"  , INIFILE_NAME ) ) )
 		return false;
 	
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | [NpcServerConn_Buffer] Send Buffer °¹¼ö : %d ", initConfig.nSendBufCnt );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | [NpcServerConn_Buffer] Recv Buffer °¹¼ö : %d ", initConfig.nRecvBufCnt );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | [NpcServerConn_Buffer] Send Buffer Å©±â : %d ", initConfig.nSendBufSize );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | [NpcServerConn_Buffer] Recv Buffer Å©±â : %d ", initConfig.nRecvBufSize );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | [NpcServerConn_Buffer] Send ÃÑ ÇÒ´ç ¹öÆÛ: %d ", initConfig.nSendBufSize * initConfig.nSendBufCnt );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | [NpcServerConn_Buffer] Recv ÃÑ ÇÒ´ç ¹öÆÛ: %d ", initConfig.nRecvBufSize * initConfig.nRecvBufCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | [NpcServerConn_Buffer] Send Buffer ê°¯ìˆ˜ : %d ", initConfig.nSendBufCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | [NpcServerConn_Buffer] Recv Buffer ê°¯ìˆ˜ : %d ", initConfig.nRecvBufCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | [NpcServerConn_Buffer] Send Buffer í¬ê¸° : %d ", initConfig.nSendBufSize );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | [NpcServerConn_Buffer] Recv Buffer í¬ê¸° : %d ", initConfig.nRecvBufSize );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | [NpcServerConn_Buffer] Send ì´ í• ë‹¹ ë²„í¼: %d ", initConfig.nSendBufSize * initConfig.nSendBufCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | [NpcServerConn_Buffer] Recv ì´ í• ë‹¹ ë²„í¼: %d ", initConfig.nRecvBufSize * initConfig.nRecvBufCnt );
 	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | [NpcServerConn_Connection] Connect Ip : %s", szIp );
 	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | [NpcServerConn_Connection] Connect Port : %d", initConfig.nServerPort );
 
@@ -297,7 +297,7 @@ bool cIocpGameServer::ConnectToNpcServer()
 		LOG_LASTERROR( "cIocpGameServer::ConnectToNpcServer() | NpcServer Connect Failed");		
 		return false;
 	}
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | NpcServer [%d]socket ¿¬°á ¼º°ø" 
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpGameServer::ConnectToNpcServer() | NpcServer [%d]socket ì—°ê²° ì„±ê³µ" 
 		, m_pNpcServerConn->GetSocket() );
 
 	return true;

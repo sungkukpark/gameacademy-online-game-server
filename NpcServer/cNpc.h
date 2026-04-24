@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "cFsm.h"
 class cNpc
 {
@@ -6,10 +6,10 @@ public:
 	cNpc(void);
 	virtual ~cNpc(void);
 
-	virtual void	OnProcess();  //NPC »óÅÂ Ã³¸®
-	virtual void	Init();       //ÃÊ±âÈ­
-	virtual void	DoWander();   //·£´ıÀ¸·Î ¿òÁ÷ÀÓ
-	virtual void	DoAttack();   //ÇÃ·¹ÀÌ¾î °ø°İ
+	virtual void	OnProcess();  //NPC ìƒíƒœ ì²˜ë¦¬
+	virtual void	Init();       //ì´ˆê¸°í™”
+	virtual void	DoWander();   //ëœë¤ìœ¼ë¡œ ì›€ì§ì„
+	virtual void	DoAttack();   //í”Œë ˆì´ì–´ ê³µê²©
 
 	void			SetTempNpcInfo();
 	inline DWORD	GetKey() { return m_dwNpcKey; }
@@ -24,12 +24,12 @@ public:
 	{ m_dwTagetPlayerPKey = dwTagetPlayerPKey; }
 
 protected:
-	eNpcType	m_eNpcType;		//NPCÁ¾·ù
-	DWORD		m_dwPos;		//NPCÀ§Ä¡
+	eNpcType	m_eNpcType;		//NPCì¢…ë¥˜
+	DWORD		m_dwPos;		//NPCìœ„ì¹˜
 	
-	char		m_szName[ MAX_NPCNAME ];	//NPCÀÌ¸§
-	DWORD		m_dwNpcKey;					//NPCÅ°
-	DWORD		m_dwTagetPlayerPKey;		//Å½ÁöµÈ ÇÃ·¹ÀÌ¾î °³ÀÎÅ°
+	char		m_szName[ MAX_NPCNAME ];	//NPCì´ë¦„
+	DWORD		m_dwNpcKey;					//NPCí‚¤
+	DWORD		m_dwTagetPlayerPKey;		//íƒì§€ëœ í”Œë ˆì´ì–´ ê°œì¸í‚¤
 
-	cFsm::cFsmClass*  m_pFsmClass;			//À¯ÇÑ »óÅÂ ±â°è Å¬·¡½º
+	cFsm::cFsmClass*  m_pFsmClass;			//ìœ í•œ ìƒíƒœ ê¸°ê³„ í´ë˜ìŠ¤
 };

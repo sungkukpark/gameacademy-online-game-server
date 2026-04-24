@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class cPlayer : public cConnection
 {
@@ -40,40 +40,40 @@ public:
 	inline BYTE* GetInActiveAreas() { return m_byInActiveAreas; }
 	inline BYTE* GetActiveAreas() { return m_byActiveAreas; }
 
-	//º¯¼ö¸¦ ÃÊ±âÈ­ ½ÃÅ²´Ù.
+	//ë³€ìˆ˜ë¥¼ ì´ˆê¸°í™” ì‹œí‚¨ë‹¤.
 	void Init();
-	//Å×½ºÆ®¸¦ À§ÇØ Á¤º¸¸¦ ÀÓ½Ã·Î Ã¤¿î´Ù.
+	//í…ŒìŠ¤íŠ¸ë¥¼ ìœ„í•´ ì •ë³´ë¥¼ ìž„ì‹œë¡œ ì±„ìš´ë‹¤.
     void SetTempPlayInfo();
 
 	////////////////////////////////////////////////////////////////
-	//Àü¼Û °ü·Ã ÇÔ¼öµé..
+	//ì „ì†¡ ê´€ë ¨ í•¨ìˆ˜ë“¤..
 
-	//Á¤º¸¸¦ Á¢¼ÓµÈ Å¬¶óÀÌ¾ðÆ®¿¡°Ô º¸³½´Ù.
+	//ì •ë³´ë¥¼ ì ‘ì†ëœ í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ë³´ë‚¸ë‹¤.
 	void Send_PlayerInfo();
 
 	
 
 private:
-	//Ä³¸¯ÅÍÀÇ ±âº» ¼Ó¼º
-	DWORD	m_dwPKey;	//ÇÃ·¹ÀÌ¾î °íÀ¯ ¹øÈ£
-	char	m_szId[ MAX_ID_LENGTH ];  //¾ÆÀÌµð
-	char	m_szNickName[ MAX_NICKNAME_LENGTH ];  //º°¸í
-	char	m_szName[ MAX_NAME_LENGTH ];  //ÀÌ¸§
+	//ìºë¦­í„°ì˜ ê¸°ë³¸ ì†ì„±
+	DWORD	m_dwPKey;	//í”Œë ˆì´ì–´ ê³ ìœ  ë²ˆí˜¸
+	char	m_szId[ MAX_ID_LENGTH ];  //ì•„ì´ë””
+	char	m_szNickName[ MAX_NICKNAME_LENGTH ];  //ë³„ëª…
+	char	m_szName[ MAX_NAME_LENGTH ];  //ì´ë¦„
 
-	DWORD	m_dwBPos;	//ÇÃ·¹ÀÌ¾î ÀÌÀü À§Ä¡          
-	DWORD	m_dwPos;	//ÇÃ·¹ÀÌ¾î ÇöÀç À§Ä¡          
-	BYTE	m_byLevel;	//·¹º§
-	BYTE	m_byStr;	//°ø°Ý·Â
-	BYTE	m_byDur;	//¹æ¾î·Â
-	DWORD	m_dwHp;		//»ý¸í·Â
-	DWORD	m_dwExp;	//°æÇèÄ¡
+	DWORD	m_dwBPos;	//í”Œë ˆì´ì–´ ì´ì „ ìœ„ì¹˜          
+	DWORD	m_dwPos;	//í”Œë ˆì´ì–´ í˜„ìž¬ ìœ„ì¹˜          
+	BYTE	m_byLevel;	//ë ˆë²¨
+	BYTE	m_byStr;	//ê³µê²©ë ¥
+	BYTE	m_byDur;	//ë°©ì–´ë ¥
+	DWORD	m_dwHp;		//ìƒëª…ë ¥
+	DWORD	m_dwExp;	//ê²½í—˜ì¹˜
 
-	DWORD   m_dwKeepAliveTick; //KeepAlive_CnÆÐÅ¶À» ¹ÞÀº ½ÃÁ¡ÀÇ ¼­¹ö Æ½
+	DWORD   m_dwKeepAliveTick; //KeepAlive_CníŒ¨í‚·ì„ ë°›ì€ ì‹œì ì˜ ì„œë²„ í‹±
 
-	BYTE	m_byArea;	//¿µ¿ª
+	BYTE	m_byArea;	//ì˜ì—­
 
 	BYTE	m_byInActiveAreas[ MAX_INACTIVE_AREAS ];
 	BYTE	m_byActiveAreas[ MAX_ACTIVE_AREAS ];
 
-	bool    m_bIsConfirm; //ÀÎÁõµÈ »ç¿ëÀÚ¶ó¸é
+	bool    m_bIsConfirm; //ì¸ì¦ëœ ì‚¬ìš©ìžë¼ë©´
 };

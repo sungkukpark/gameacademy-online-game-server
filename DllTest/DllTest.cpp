@@ -1,4 +1,4 @@
-#include "DllTest.h"
+﻿#include "DllTest.h"
 
 void cMyClass::Sum( int a , int b )
 {

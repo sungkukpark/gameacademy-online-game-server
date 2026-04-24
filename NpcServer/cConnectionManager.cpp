@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+ï»¿#include "StdAfx.h"
 #include ".\cconnectionmanager.h"
 
 IMPLEMENT_SINGLETON( cConnectionManager )
@@ -33,11 +33,11 @@ bool cConnectionManager::AddConnection( cConnection* pConnection )
 	cMonitor::Owner lock( m_csConnection );
 	CONN_IT conn_it;
 	conn_it = m_mapConnection.find( pConnection );
-	//ÀÌ¹Ì Á¢¼ÓµÇ¾î ÀÖ´Â ¿¬°áÀÌ¶ó¸é
+	//ì´ë¯¸ ì ‘ì†ë˜ì–´ ìˆëŠ” ì—°ê²°ì´ë¼ë©´
 	if( conn_it != m_mapConnection.end() )
 	{
 		LOG( LOG_INFO_NORMAL , 
-			"SYSTEM | cConnectionManager::AddConnection() | index[%d]´Â ÀÌ¹Ì m_mapConnection¿¡ ÀÖ½À´Ï´Ù.",
+			"SYSTEM | cConnectionManager::AddConnection() | index[%d]ëŠ” ì´ë¯¸ m_mapConnectionì— ìˆìŠµë‹ˆë‹¤.",
 			pConnection->GetIndex() );
 		return false;
 	}
@@ -50,11 +50,11 @@ bool cConnectionManager::RemoveConnection( cConnection* pConnection )
 	cMonitor::Owner lock( m_csConnection );
 	CONN_IT conn_it;
 	conn_it = m_mapConnection.find( pConnection );
-	//Á¢¼ÓµÇ¾î ÀÖ´Â ¿¬°áÀÌ ¾ø´Â°æ¿ì
+	//ì ‘ì†ë˜ì–´ ìˆëŠ” ì—°ê²°ì´ ì—†ëŠ”ê²½ìš°
 	if( conn_it == m_mapConnection.end() )
 	{
 		LOG( LOG_INFO_NORMAL , 
-			"SYSTEM | cConnectionManager::RemoveConnection() | index[%d]´Â m_mapConnection¿¡ ¾ø½À´Ï´Ù.",
+			"SYSTEM | cConnectionManager::RemoveConnection() | index[%d]ëŠ” m_mapConnectionì— ì—†ìŠµë‹ˆë‹¤.",
 			pConnection->GetIndex() );
 		return false;
 	}

@@ -1,4 +1,4 @@
-#if !defined(AFX_MsgViewFromLog_H__2C8777BF_BA93_4858_B921_D518A11AEDE4__INCLUDED_)
+ï»¿#if !defined(AFX_MsgViewFromLog_H__2C8777BF_BA93_4858_B921_D518A11AEDE4__INCLUDED_)
 #define AFX_MsgViewFromLog_H__2C8777BF_BA93_4858_B921_D518A11AEDE4__INCLUDED_
 
 #if _MSC_VER > 1000
@@ -26,7 +26,7 @@ public:
 	static CListCtrl *m_pListCtrl;
 // Operations
 public:
-	CImageList*				m_pImageList;					//Á¤º¸,¿¡·¯¿¡ ´ëÇÑ ÀÌ¹ÌÁö¸¦ °¡Áö°í ÀÖ´Ù.
+	CImageList*				m_pImageList;					//ì •ë³´,ì—ëŸ¬ì— ëŒ€í•œ ì´ë¯¸ì§€ë¥¼ ê°€ì§€ê³  ìˆë‹¤.
 	CNpcServerDoc* __fastcall GetDocument()
 	{
 		//return dynamic_cast<CMapServerDoc*>( m_pDocument );

@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+ï»¿#include "StdAfx.h"
 #include ".\cplayer.h"
 
 cPlayer::cPlayer(void)
@@ -11,11 +11,11 @@ cPlayer::~cPlayer(void)
 {
 }
 
-//º¯¼ö¸¦ ÃÊ±âÈ­ ½ÃÅ²´Ù.
+//ë³€ìˆ˜ë¥¼ ì´ˆê¸°í™” ì‹œí‚¨ë‹¤.
 void cPlayer::Init()
 {
 	m_dwPKey = 0;
 	m_bIsDead = false;
-	m_dwPos = 0;	//ÇÃ·¹ÀÌ¾î À§Ä¡          
+	m_dwPos = 0;	//í”Œë ˆì´ì–´ ìœ„ì¹˜          
 	m_byArea = 0xFF;
 }

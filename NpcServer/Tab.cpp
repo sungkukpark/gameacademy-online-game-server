@@ -1,4 +1,4 @@
-// Tab.cpp: implementation of the CTabItem class.
+﻿// Tab.cpp: implementation of the CTabItem class.
 //
 //////////////////////////////////////////////////////////////////////
 #include "stdafx.h"

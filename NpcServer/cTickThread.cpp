@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+﻿#include "StdAfx.h"
 #include ".\ctickthread.h"
 
 cTickThread::cTickThread(void)

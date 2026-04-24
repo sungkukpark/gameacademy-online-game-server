@@ -1,4 +1,4 @@
-#include "Precompile.h"
+﻿#include "Precompile.h"
 #include "cmonitor.h"
 
 cMonitor::cMonitor(void)

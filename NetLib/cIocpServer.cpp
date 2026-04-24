@@ -1,4 +1,4 @@
-#include "Precompile.h"
+ï»¿#include "Precompile.h"
 unsigned int WINAPI CallWorkerThread(LPVOID p);
 unsigned int WINAPI CallManagerThread(LPVOID p);
 
@@ -65,14 +65,14 @@ bool cIocpServer::ServerStart( INITCONFIG &initConfig )
 bool cIocpServer::ServerOff()
 {
 	LOG( LOG_INFO_LOW , 
-		"SYSTEM | cIocpServer::ServerOff() | ¼­¹ö Á¾·á¸¦ ½ÃÀÛÇÕ´Ï´Ù." );
-	// ¸ðµç ¾²·¹µå¸¦ ¸ØÃß°í.. ¿ÏÀüÈ÷ Á¾·á ÇÏ±âÀ§ÇØ µÞ Ã³¸®¸¦ ÇØÁØ´Ù.
+		"SYSTEM | cIocpServer::ServerOff() | ì„œë²„ ì¢…ë£Œë¥¼ ì‹œìž‘í•©ë‹ˆë‹¤." );
+	// ëª¨ë“  ì“°ë ˆë“œë¥¼ ë©ˆì¶”ê³ .. ì™„ì „ížˆ ì¢…ë£Œ í•˜ê¸°ìœ„í•´ ë’· ì²˜ë¦¬ë¥¼ í•´ì¤€ë‹¤.
 	if( m_hWorkerIOCP )
 	{
 		m_bWorkThreadFlag = false;
 		for(DWORD i = 0; i < m_dwWorkerThreadCount; i++)
 		{
-			// WorkerThread¿¡ Á¾·á ¸Þ½ÃÁö¸¦ º¸³½´Ù.
+			// WorkerThreadì— ì¢…ë£Œ ë©”ì‹œì§€ë¥¼ ë³´ë‚¸ë‹¤.
 			PostQueuedCompletionStatus(m_hWorkerIOCP, 0, 0, NULL);
 		}
 		CloseHandle(m_hWorkerIOCP);
@@ -83,21 +83,21 @@ bool cIocpServer::ServerOff()
 		m_bProcessThreadFlag = false;
 		for(DWORD i = 0; i < m_dwProcessThreadCount; i++)
 		{
-			// ProcessThread¿¡ Á¾·á ¸Þ½ÃÁö¸¦ º¸³½´Ù.
+			// ProcessThreadì— ì¢…ë£Œ ë©”ì‹œì§€ë¥¼ ë³´ë‚¸ë‹¤.
 			PostQueuedCompletionStatus(m_hProcessIOCP, 0, 0, NULL);
 		}
 		CloseHandle(m_hProcessIOCP);
 		m_hProcessIOCP = NULL;
 	}
 
-	// ÇÚµéÀ» ´Ý´Â´Ù.
+	// í•¸ë“¤ì„ ë‹«ëŠ”ë‹¤.
 	for(unsigned int i = 0; i < m_dwWorkerThreadCount; i++)
 	{
 		if(m_hWorkerThread[i] != INVALID_HANDLE_VALUE)
 			CloseHandle(m_hWorkerThread[i]);
 		m_hWorkerThread[i] = INVALID_HANDLE_VALUE;
 	}			
-	// ÇÚµéÀ» ´Ý´Â´Ù.
+	// í•¸ë“¤ì„ ë‹«ëŠ”ë‹¤.
 	for(i = 0; i < m_dwProcessThreadCount; i++)
 	{
 		if(m_hProcessThread[i] != INVALID_HANDLE_VALUE)
@@ -111,7 +111,7 @@ bool cIocpServer::ServerOff()
 		m_ListenSock = INVALID_SOCKET;
 	}
 	LOG( LOG_INFO_LOW ,
-		"SYSTEM | cIocpServer::ServerOff() | ¼­¹ö°¡ ¿ÏÀüÈ÷ Á¾·á µÇ¾ú½À´Ï´Ù." );
+		"SYSTEM | cIocpServer::ServerOff() | ì„œë²„ê°€ ì™„ì „ížˆ ì¢…ë£Œ ë˜ì—ˆìŠµë‹ˆë‹¤." );
 	return true;
 
 }
@@ -136,7 +136,7 @@ bool cIocpServer::InitializeSocket()
 	return true;
 }
 
-//CPU°³¼ö¸¦ ÆÄ¾ÇÇÏ¿© Àû´çÇÑ WorkerThreadÀÇ °³¼ö¸¦ ¾ò¾î¿Â´Ù. (cpu*2 + 1)
+//CPUê°œìˆ˜ë¥¼ íŒŒì•…í•˜ì—¬ ì ë‹¹í•œ WorkerThreadì˜ ê°œìˆ˜ë¥¼ ì–»ì–´ì˜¨ë‹¤. (cpu*2 + 1)
 void cIocpServer::GetProperThreadsCount()
 {
 	SYSTEM_INFO		SystemInfo;
@@ -295,7 +295,7 @@ void cIocpServer::WorkerThread()
 			&lpOverlapped,
 			INFINITE);
 
-		//client°¡ Á¢¼ÓÀ» ²÷¾úÀ»¶§..			
+		//clientê°€ ì ‘ì†ì„ ëŠì—ˆì„ë•Œ..			
 		if( !bSuccess )
 		{
 			if( lpOverlapped == NULL && lpConnection == NULL )
@@ -309,7 +309,7 @@ void cIocpServer::WorkerThread()
 			lpConnection = (cConnection*)lpOverlappedEx->s_lpConnection;
 			if( lpConnection == NULL )
 				continue;
-			//Overlapped I/O¿äÃ» µÇ¾îÀÖ´ø ÀÛ¾÷ÀÇ Ä«¿îÆ®¸¦ ÁÙÀÎ´Ù.
+			//Overlapped I/Oìš”ì²­ ë˜ì–´ìžˆë˜ ìž‘ì—…ì˜ ì¹´ìš´íŠ¸ë¥¼ ì¤„ì¸ë‹¤.
 			if( lpOverlappedEx->s_eOperation == OP_ACCEPT )
 				lpConnection->DecrementAcceptIoRefCount();
 			else if( lpOverlappedEx->s_eOperation == OP_RECV )
@@ -358,7 +358,7 @@ void cIocpServer::DoAccept( LPOVERLAPPED_EX lpOverlappedEx )
 	
 	lpConnection->DecrementAcceptIoRefCount();
 
-	//remote address¸¦ ¾Ë¾Æ³½´Ù.
+	//remote addressë¥¼ ì•Œì•„ë‚¸ë‹¤.
 	GetAcceptExSockaddrs( lpConnection->m_szAddressBuf , 0 , sizeof(SOCKADDR_IN) + 16 ,
 		sizeof(SOCKADDR_IN) + 16 , &lpLocalSockAddr , &nLocalSockaddrLen ,
 		&lpRemoteSockAddr , &nRemoteSockaddrLen );
@@ -426,7 +426,7 @@ void cIocpServer::DoRecv( LPOVERLAPPED_EX lpOverlappedEx , DWORD dwIoSize )
 		pNext = lpOverlappedEx->s_WsaBuf.buf;
 
 	}
-	else	//ÇÏ³ª ÀÌ»óÀÇ ÆÐÅ¶ÀÇ µ¥ÀÌÅÍ¸¦ ¸ðµÎ ¹Þ¾Ò´Ù¸é
+	else	//í•˜ë‚˜ ì´ìƒì˜ íŒ¨í‚·ì˜ ë°ì´í„°ë¥¼ ëª¨ë‘ ë°›ì•˜ë‹¤ë©´
 	{
 		pCurrent		= &(lpOverlappedEx->s_WsaBuf.buf[0]);
 		int	  dwCurrentSize = nMsgSize;
@@ -484,7 +484,7 @@ void cIocpServer::DoSend( LPOVERLAPPED_EX lpOverlappedEx , DWORD dwIoSize )
 	lpConnection->DecrementSendIoRefCount();
 
 	lpOverlappedEx->s_dwRemain += dwIoSize;
-	// ¸¸¾à ¸ðµç ¸Þ½ÃÁö¸¦ ´Ù º¸³»Áö ¸øÇß´Ù¸é
+	// ë§Œì•½ ëª¨ë“  ë©”ì‹œì§€ë¥¼ ë‹¤ ë³´ë‚´ì§€ ëª»í–ˆë‹¤ë©´
 	if((DWORD)lpOverlappedEx->s_nTotalBytes > lpOverlappedEx->s_dwRemain)
 	{
 		DWORD dwFlag = 0;
@@ -511,7 +511,7 @@ void cIocpServer::DoSend( LPOVERLAPPED_EX lpOverlappedEx , DWORD dwIoSize )
 		}
 
 	}
-	else	//¸ðµç ¸Þ½ÃÁö¸¦ ´Ù º¸³Â´Ù¸é
+	else	//ëª¨ë“  ë©”ì‹œì§€ë¥¼ ë‹¤ ë³´ëƒˆë‹¤ë©´
 	{
 		lpConnection->m_ringSendBuffer.ReleaseBuffer( lpOverlappedEx->s_nTotalBytes );
 		InterlockedExchange( (LPLONG)&lpConnection->m_bIsSend , TRUE);
@@ -548,7 +548,7 @@ bool cIocpServer::ProcessPacket( cConnection* lpConnection ,
 	int nUseBufSize = lpConnection->m_ringRecvBuffer.GetUsedBufferSize();
 	
 	///////////////////////////////////////////////////////////////////////
-	//¸¸¾à ´ÜÀÏ·Î Ã³¸® ÇÏÁö ¾Ê¾Æµµ µÇ´Â°ÍÀÌ¸é °ð¹Ù·Î Ã³¸®ÇÑ´Ù.
+	//ë§Œì•½ ë‹¨ì¼ë¡œ ì²˜ë¦¬ í•˜ì§€ ì•Šì•„ë„ ë˜ëŠ”ê²ƒì´ë©´ ê³§ë°”ë¡œ ì²˜ë¦¬í•œë‹¤.
 	if( !OnRecvImmediately( lpConnection , dwCurrentSize,  pCurrent ) )
 	{
 			
@@ -566,7 +566,7 @@ bool cIocpServer::ProcessPacket( cConnection* lpConnection ,
 				, GetLastError() , lpConnection->GetSocket() );
 		}
 	}
-	//Ã³¸®µÈ ÆÐÅ¶Àº ¸µ ¹öÆÛ¿¡¼­ ÇÒ´çµÈ ¹öÆÛ¸¦ ÇØÁ¦ÇÑ´Ù.
+	//ì²˜ë¦¬ëœ íŒ¨í‚·ì€ ë§ ë²„í¼ì—ì„œ í• ë‹¹ëœ ë²„í¼ë¥¼ í•´ì œí•œë‹¤.
 	else
 		lpConnection->m_ringRecvBuffer.ReleaseBuffer( dwCurrentSize );
 	return true;
@@ -574,12 +574,12 @@ bool cIocpServer::ProcessPacket( cConnection* lpConnection ,
 
 bool cIocpServer::CloseConnection( cConnection* lpConnection )
 {
-	//·¹ÆÛ·±½º Ä«¿îÆ®°¡ ³²¾ÆÀÖ´Ù¸é ¼ÒÄÏÀ» ²÷°í iocp¿¡¼­ completionµÉ¶§°¡Áö ±â´Ù·Á¾ßÇÑ´Ù.
+	//ë ˆí¼ëŸ°ìŠ¤ ì¹´ìš´íŠ¸ê°€ ë‚¨ì•„ìžˆë‹¤ë©´ ì†Œì¼“ì„ ëŠê³  iocpì—ì„œ completionë ë•Œê°€ì§€ ê¸°ë‹¤ë ¤ì•¼í•œë‹¤.
 	if( lpConnection->GetAcceptIoRefCount() != 0 ||
 		lpConnection->GetRecvIoRefCount() != 0 ||
 		lpConnection->GetSendIoRefCount() != 0 )
 	{
-		//¼ÒÄÏ ÃÊ±âÈ­
+		//ì†Œì¼“ ì´ˆê¸°í™”
 		shutdown( lpConnection->GetSocket(), SD_BOTH );
 		closesocket( lpConnection->GetSocket() );
 		lpConnection->SetSocket( INVALID_SOCKET );
@@ -625,7 +625,7 @@ void cIocpServer::ProcessThread()
 			(LPDWORD)&lpConnection,
 			(LPOVERLAPPED*)&lpProcessPacket,
 			INFINITE);
-		//¾²·¹µå Á¾·á
+		//ì“°ë ˆë“œ ì¢…ë£Œ
 		if( TRUE == bSuccess && NULL == lpConnection )
 			break;
 

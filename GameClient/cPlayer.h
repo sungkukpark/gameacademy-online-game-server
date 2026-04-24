@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class cPlayer
 {
@@ -32,26 +32,26 @@ public:
 	inline void SetVisible( bool bVisible ) { m_bVisible = bVisible; }
 	
 
-	//º¯¼ö¸¦ ÃÊ±âÈ­ ½ÃÅ²´Ù.
+	//ë³€ìˆ˜ë¥¼ ì´ˆê¸°í™” ì‹œí‚¨ë‹¤.
 	void Init();
-	//ÇÃ·¹ÀÌ¾î Á¤º¸ ÆÐÅ¶À» ¹Þ¾Æ Á¤º¸¸¦ ¼³Á¤ÇÑ´Ù.
+	//í”Œë ˆì´ì–´ ì •ë³´ íŒ¨í‚·ì„ ë°›ì•„ ì •ë³´ë¥¼ ì„¤ì •í•œë‹¤.
 	void SetPlayerInfoFromPacket( char* pPlayerInfo );
 	
 private:
-	//Ä³¸¯ÅÍÀÇ ±âº» ¼Ó¼º
-	DWORD	m_dwPKey;	//ÇÃ·¹ÀÌ¾î °íÀ¯ ¹øÈ£
-	char	m_szId[ MAX_ID_LENGTH ];  //¾ÆÀÌµð
-	char	m_szNickName[ MAX_NICKNAME_LENGTH ];  //º°¸í
-	char	m_szName[ MAX_NAME_LENGTH ];  //ÀÌ¸§
+	//ìºë¦­í„°ì˜ ê¸°ë³¸ ì†ì„±
+	DWORD	m_dwPKey;	//í”Œë ˆì´ì–´ ê³ ìœ  ë²ˆí˜¸
+	char	m_szId[ MAX_ID_LENGTH ];  //ì•„ì´ë””
+	char	m_szNickName[ MAX_NICKNAME_LENGTH ];  //ë³„ëª…
+	char	m_szName[ MAX_NAME_LENGTH ];  //ì´ë¦„
 
-	DWORD	m_dwPos;	//ÇÃ·¹ÀÌ¾î À§Ä¡          
-	BYTE	m_byLevel;	//·¹º§
-	BYTE	m_byStr;	//°ø°Ý·Â
-	BYTE	m_byDur;	//¹æ¾î·Â
-	DWORD	m_dwHp;		//»ý¸í·Â
-	DWORD	m_dwExp;	//°æÇèÄ¡
-	bool	m_bVisible;	//Ãâ·Â
+	DWORD	m_dwPos;	//í”Œë ˆì´ì–´ ìœ„ì¹˜          
+	BYTE	m_byLevel;	//ë ˆë²¨
+	BYTE	m_byStr;	//ê³µê²©ë ¥
+	BYTE	m_byDur;	//ë°©ì–´ë ¥
+	DWORD	m_dwHp;		//ìƒëª…ë ¥
+	DWORD	m_dwExp;	//ê²½í—˜ì¹˜
+	bool	m_bVisible;	//ì¶œë ¥
 
-	DWORD	m_dwTPos;	//¿òÁ÷ÀÏ À§Ä¡
+	DWORD	m_dwTPos;	//ì›€ì§ì¼ ìœ„ì¹˜
 
 };

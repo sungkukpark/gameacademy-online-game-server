@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+ï»¿#include "StdAfx.h"
 #include ".\cplayermanager.h"
 
 IMPLEMENT_SINGLETON( cPlayerManager );
@@ -27,11 +27,11 @@ bool cPlayerManager::AddPlayer( cPlayer* pPlayer )
 	cMonitor::Owner lock( m_csPlayer );
 	PLAYER_IT player_it;
 	player_it = m_mapPlayer.find( pPlayer->GetPKey() );
-	//ÀÌ¹Ì Á¢¼ÓµÇ¾î ÀÖ´Â ÇÃ·¹ÀÌ¾î¶ó¸é
+	//ì´ë¯¸ ì ‘ì†ë˜ì–´ ìˆëŠ” í”Œë ˆì´ì–´ë¼ë©´
 	if( player_it != m_mapPlayer.end() )
 	{
 		LOG( LOG_ERROR_NORMAL , 
-			"SYSTEM | cPlayerManager::AddPlayer() | PKey[%d]´Â ÀÌ¹Ì m_mapPlayer¿¡ ÀÖ½À´Ï´Ù.",
+			"SYSTEM | cPlayerManager::AddPlayer() | PKey[%d]ëŠ” ì´ë¯¸ m_mapPlayerì— ìˆìŠµë‹ˆë‹¤.",
 			pPlayer->GetPKey() );
 		return false;
 	}
@@ -45,15 +45,15 @@ bool cPlayerManager::RemovePlayer( DWORD dwPKey )
 	cMonitor::Owner lock( m_csPlayer );
 	PLAYER_IT player_it;
 	player_it = m_mapPlayer.find( dwPKey );
-	//ÇØ´ç ÇÃ·¹ÀÌ¾î°¡ ¾ø´Â °æ¿ì
+	//í•´ë‹¹ í”Œë ˆì´ì–´ê°€ ì—†ëŠ” ê²½ìš°
 	if( player_it == m_mapPlayer.end() )
 	{
 		LOG( LOG_ERROR_NORMAL , 
-			"SYSTEM | cPlayerManager::RemovePlayer() | PKey[%d]´Â m_mapPlayer¿¡ ¾ø½À´Ï´Ù.",
+			"SYSTEM | cPlayerManager::RemovePlayer() | PKey[%d]ëŠ” m_mapPlayerì— ì—†ìŠµë‹ˆë‹¤.",
 			dwPKey );
 		return false;
 	}
-	//ÇÃ·¹ÀÌ¾î ÃÊ±âÈ­
+	//í”Œë ˆì´ì–´ ì´ˆê¸°í™”
 	cPlayer* pPlayer = (cPlayer*)player_it->second;
 	pPlayer->Init();
 
@@ -75,11 +75,11 @@ cPlayer* cPlayerManager::FindPlayer( DWORD dwPKey )
 	cMonitor::Owner lock( m_csPlayer );
 	PLAYER_IT player_it;
 	player_it = m_mapPlayer.find( dwPKey );
-	//ÇØ´ç ÇÃ·¹ÀÌ¾î°¡ ¾ø´Â °æ¿ì
+	//í•´ë‹¹ í”Œë ˆì´ì–´ê°€ ì—†ëŠ” ê²½ìš°
 	if( player_it == m_mapPlayer.end() )
 	{
 		LOG( LOG_ERROR_NORMAL , 
-			"SYSTEM | cPlayerManager::FindPlayer() | PKey[%d]´Â m_mapPlayer¿¡ ¾ø½À´Ï´Ù.",
+			"SYSTEM | cPlayerManager::FindPlayer() | PKey[%d]ëŠ” m_mapPlayerì— ì—†ìŠµë‹ˆë‹¤.",
 			dwPKey );
 		return NULL;
 	}

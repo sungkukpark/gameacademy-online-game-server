@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+ï»¿#include "StdAfx.h"
 #include ".\cplayer.h"
 
 cPlayer::cPlayer(void)
@@ -11,7 +11,7 @@ cPlayer::~cPlayer(void)
 {
 }
 
-//º¯¼ö¸¦ ÃÊ±âÈ­ ½ÃÅ²´Ù.
+//ë³€ìˆ˜ë¥¼ ì´ˆê¸°í™” ì‹œí‚¨ë‹¤.
 void cPlayer::Init()
 {
 	m_dwPKey = 0;
@@ -19,20 +19,20 @@ void cPlayer::Init()
 	ZeroMemory( m_szNickName , MAX_NICKNAME_LENGTH );
 	ZeroMemory( m_szName , MAX_NAME_LENGTH );
 	
-	m_dwPos = 0;	//ÇÃ·¹ÀÌ¾î À§Ä¡          
-	m_byLevel = 0;	//·¹º§
-	m_byStr = 0;	//°ø°Ý·Â
-	m_byDur = 0;	//¹æ¾î·Â
-	m_dwHp = 0;		//»ý¸í·Â
-	m_dwExp = 0;	//°æÇèÄ¡
-	m_dwTPos = 0;   //¿òÁ÷ÀÏ À§Ä¡
+	m_dwPos = 0;	//í”Œë ˆì´ì–´ ìœ„ì¹˜          
+	m_byLevel = 0;	//ë ˆë²¨
+	m_byStr = 0;	//ê³µê²©ë ¥
+	m_byDur = 0;	//ë°©ì–´ë ¥
+	m_dwHp = 0;		//ìƒëª…ë ¥
+	m_dwExp = 0;	//ê²½í—˜ì¹˜
+	m_dwTPos = 0;   //ì›€ì§ì¼ ìœ„ì¹˜
 	m_bVisible = true;
 }
 void cPlayer::SetPlayerInfoFromPacket( char* pPlayerInfo )
 {
 	VBuffer()->SetBuffer( pPlayerInfo );
 
-	VBuffer()->GetInteger( (int&)m_dwPKey );			//°³ÀÎÅ°
+	VBuffer()->GetInteger( (int&)m_dwPKey );			//ê°œì¸í‚¤
 	VBuffer()->GetString( m_szId );
 	VBuffer()->GetString( m_szNickName );
 	VBuffer()->GetString( m_szName );

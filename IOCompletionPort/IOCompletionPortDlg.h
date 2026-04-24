@@ -1,35 +1,35 @@
-// IOCompletionPortDlg.h : Çì´õ ÆÄÀÏ
+ï»¿// IOCompletionPortDlg.h : í—¤ë” íŒŒì¼
 //
 
 #pragma once
 #include "cIOCompletionPort.h"
 #include "resource.h"
 
-// CIOCompletionPortDlg ´ëÈ­ »óÀÚ
+// CIOCompletionPortDlg ëŒ€í™” ìƒì
 class CIOCompletionPortDlg : public CDialog
 {
-// »ı¼º
+// ìƒì„±
 public:
-	CIOCompletionPortDlg(CWnd* pParent = NULL);	// Ç¥ÁØ »ı¼ºÀÚ
+	CIOCompletionPortDlg(CWnd* pParent = NULL);	// í‘œì¤€ ìƒì„±ì
 
-// ´ëÈ­ »óÀÚ µ¥ÀÌÅÍ
+// ëŒ€í™” ìƒì ë°ì´í„°
 	enum { IDD = IDD_IOCOMPLETIONPORT_DIALOG };
 
 	void OutputMsg( char *szOutputString , ... );
 
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV Áö¿ø
+	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV ì§€ì›
 
 private:
-	//IOCompletionPort°´Ã¼¸¦ »ı¼ºÇÑ´Ù.
+	//IOCompletionPortê°ì²´ë¥¼ ìƒì„±í•œë‹¤.
 	cIOCompletionPort m_IOCompletionPort;
 
-// ±¸Çö
+// êµ¬í˜„
 protected:
 	HICON m_hIcon;
 
-	// ¸Ş½ÃÁö ¸Ê ÇÔ¼ö¸¦ »ı¼ºÇß½À´Ï´Ù.
+	// ë©”ì‹œì§€ ë§µ í•¨ìˆ˜ë¥¼ ìƒì„±í–ˆìŠµë‹ˆë‹¤.
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
@@ -38,7 +38,7 @@ protected:
 public:
 	afx_msg void OnBnClickedStartserver();
 
-	//¸Ş¼¼Áö¸¦ Ãâ·ÂÇÏ±â À§ÇØ ¸¸µç ¸®½ºÆ® ¹Ú½º ÄÁÆ®·Ñ
+	//ë©”ì„¸ì§€ë¥¼ ì¶œë ¥í•˜ê¸° ìœ„í•´ ë§Œë“  ë¦¬ìŠ¤íŠ¸ ë°•ìŠ¤ ì»¨íŠ¸ë¡¤
 	CListBox m_ctOutput;
 
 	afx_msg void OnBnClickedCancel();

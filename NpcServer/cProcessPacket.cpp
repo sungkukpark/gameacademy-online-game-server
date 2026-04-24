@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+ï»¿#include "StdAfx.h"
 #include ".\cprocesspacket.h"
 
 cProcessPacket::cProcessPacket(void)
@@ -11,12 +11,12 @@ cProcessPacket::~cProcessPacket(void)
 void cProcessPacket::fnNPCLoginPlayerCn( cConnection* pConnection,  DWORD dwSize , char* pRecvedMsg )
 {
 	NPCLoginPlayerCn* pLoginPlayer = (NPCLoginPlayerCn*)pRecvedMsg;
-    //ÇÃ·¹ÀÌ¾î Ãß°¡ 
+    //í”Œë ˆì´ì–´ ì¶”ê°€ 
 	cPlayer* pPlayer = PlayerManager()->GetEmptyPlayer();
 	if( NULL == pPlayer )
 	{
 		LOG( LOG_INFO_LOW,
-		"SYSTEM | cProcessPacket::fnNPCLoginPlayerCn() | ´õ ÀÌ»ó ÇÃ·¹ÀÌ¾î°¡ NPC¼­¹ö·Î ·Î±äÇÒ ¼ö ¾ø½À´Ï´Ù.");
+		"SYSTEM | cProcessPacket::fnNPCLoginPlayerCn() | ë” ì´ìƒ í”Œë ˆì´ì–´ê°€ NPCì„œë²„ë¡œ ë¡œê¸´í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 		return;	
 	}
 	pPlayer->SetPKey( pLoginPlayer->s_dwPKey );
@@ -27,7 +27,7 @@ void cProcessPacket::fnNPCLoginPlayerCn( cConnection* pConnection,  DWORD dwSize
 	ConnectionManager()->Send_GatherVBuffer();
 
 	LOG( LOG_INFO_LOW,
-		"SYSTEM | cProcessPacket::fnNPCLoginPlayerCn() | PKey(%d)ÇÃ·¹ÀÌ¾î ·Î±×ÀÎ, ÇöÀç ÇÃ·¹ÀÌ¾î ¼ö(%d)",
+		"SYSTEM | cProcessPacket::fnNPCLoginPlayerCn() | PKey(%d)í”Œë ˆì´ì–´ ë¡œê·¸ì¸, í˜„ìž¬ í”Œë ˆì´ì–´ ìˆ˜(%d)",
 		pLoginPlayer->s_dwPKey , PlayerManager()->GetPlayerCnt() );
 }
 
@@ -35,7 +35,7 @@ void cProcessPacket::fnNPCMovePlayerCn( cConnection* pConnection,  DWORD dwSize 
 {
 	NPCMovePlayerCn* pMovePlayer = (NPCMovePlayerCn*)pRecvedMsg;
 	LOG( LOG_INFO_LOW,
-		"SYSTEM | cProcessPacket::fnNPCMovePlayerCn() | PKey(%d)ÇÃ·¹ÀÌ¾î ÀÌµ¿",
+		"SYSTEM | cProcessPacket::fnNPCMovePlayerCn() | PKey(%d)í”Œë ˆì´ì–´ ì´ë™",
 		pMovePlayer->s_dwPKey );
 
 	cPlayer* pPlayer = PlayerManager()->FindPlayer( pMovePlayer->s_dwPKey );
@@ -47,10 +47,10 @@ void cProcessPacket::fnNPCMovePlayerCn( cConnection* pConnection,  DWORD dwSize 
 void cProcessPacket::fnNPCLogoutPlayerCn( cConnection* pConnection,  DWORD dwSize , char* pRecvedMsg )
 {
 	NPCLogoutPlayerCn* pLogoutPlayer = (NPCLogoutPlayerCn*)pRecvedMsg;
-	//ÇÃ·¹ÀÌ¾î Á¦°Å
+	//í”Œë ˆì´ì–´ ì œê±°
 	PlayerManager()->RemovePlayer( pLogoutPlayer->s_dwPKey );
 	LOG( LOG_INFO_LOW,
-		"SYSTEM | cProcessPacket::fnNPCLogoutPlayerCn() | PKey(%d)ÇÃ·¹ÀÌ¾î ·Î±×¾Æ¿ô, ÇöÀç ÇÃ·¹ÀÌ¾î ¼ö(%d)",
+		"SYSTEM | cProcessPacket::fnNPCLogoutPlayerCn() | PKey(%d)í”Œë ˆì´ì–´ ë¡œê·¸ì•„ì›ƒ, í˜„ìž¬ í”Œë ˆì´ì–´ ìˆ˜(%d)",
 		pLogoutPlayer->s_dwPKey , PlayerManager()->GetPlayerCnt() );
 }
 
@@ -58,7 +58,7 @@ void cProcessPacket::fnNPCDeadPlayerCn( cConnection* pConnection,  DWORD dwSize 
 {
 	NPCDeadPlayerCn* pDeadPlayer = (NPCDeadPlayerCn*)pRecvedMsg;
 	LOG( LOG_INFO_LOW,
-		"SYSTEM | cProcessPacket::fnNPCLogoutPlayerCn() | PKey(%d)ÇÃ·¹ÀÌ¾î°¡ Á×À½!!",
+		"SYSTEM | cProcessPacket::fnNPCLogoutPlayerCn() | PKey(%d)í”Œë ˆì´ì–´ê°€ ì£½ìŒ!!",
 		pDeadPlayer->s_dwPKey  );
 	cPlayer* pPlayer = PlayerManager()->FindPlayer( pDeadPlayer->s_dwPKey );
 	if( NULL == pPlayer )

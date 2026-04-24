@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "cNpc.h"
 
 class cNpcManager : public cSingleton , cMonitor
@@ -20,10 +20,10 @@ public:
 	inline int GetCnt() { return (int)m_mapNpc.size(); }
 	
 	void UpdateNpc();
-	//°íÀ¯ÇÑ Å°¸¦ »ı¼ºÇÏ¿© ¾ò¾î³½´Ù.
+	//ê³ ìœ í•œ í‚¤ë¥¼ ìƒì„±í•˜ì—¬ ì–»ì–´ë‚¸ë‹¤.
 	inline DWORD GenerateNpcKey() { return ++m_dwGenerateNpcKey; }
 
-	//°ÔÀÓ ¼­¹ö¿¡ º¸³¾ NPCÁ¤º¸¸¦ VBuffer()¿¡ ¸ğÀº´Ù.
+	//ê²Œì„ ì„œë²„ì— ë³´ë‚¼ NPCì •ë³´ë¥¼ VBuffer()ì— ëª¨ì€ë‹¤.
 	void GatherVBuffer_NpcInfo();
 	void GatherVBuffer_UpdateNpc();
 private:

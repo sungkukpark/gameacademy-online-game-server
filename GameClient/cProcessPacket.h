@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "GameClientDlg.h"
 class cProcessPacket 
 {
@@ -10,7 +10,7 @@ public:
 	static void fnLoginPlayerSn( CGameClientDlg* pClientDlg ,char* pRecvBuf , int nRecvLen );
 	static void fnLogoutPlayerSn( CGameClientDlg* pClientDlg ,char* pRecvBuf , int nRecvLen );
 	static void fnMovePlayerSn( CGameClientDlg* pClientDlg ,char* pRecvBuf , int nRecvLen );
-	//NPC°ü·Ã ÆÐÅ¶
+	//NPCê´€ë ¨ íŒ¨í‚·
 	static void fnNPCNpcInfoVSn( CGameClientDlg* pClientDlg ,char* pRecvBuf , int nRecvLen );
 	static void fnNPCUpdateNpcVSn( CGameClientDlg* pClientDlg ,char* pRecvBuf , int nRecvLen );
 	static void fnAttackNpcToPlayerSn( CGameClientDlg* pClientDlg ,char* pRecvBuf , int nRecvLen );

@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+ï»¿#include "StdAfx.h"
 #include ".\cplayer.h"
 
 cPlayer::cPlayer(void)
@@ -11,7 +11,7 @@ cPlayer::~cPlayer(void)
 {
 }
 
-//º¯¼ö¸¦ ÃÊ±âÈ­ ½ÃÅ²´Ù.
+//ë³€ìˆ˜ë¥¼ ì´ˆê¸°í™” ì‹œí‚¨ë‹¤.
 void cPlayer::Init()
 {
 	m_dwPKey = 0;
@@ -22,23 +22,23 @@ void cPlayer::Init()
 	memset( m_byInActiveAreas , 0xFF , MAX_INACTIVE_AREAS );
 	memset( m_byActiveAreas , 0xFF , MAX_ACTIVE_AREAS );
 	
-	m_dwBPos = 0;   //ÇÃ·¹ÀÌ¾î ÀÌÀü À§Ä¡
-	m_dwPos = 0;	//ÇÃ·¹ÀÌ¾î À§Ä¡          
-	m_byLevel = 0;	//·¹º§
-	m_byStr = 0;	//°ø°İ·Â
-	m_byDur = 0;	//¹æ¾î·Â
-	m_dwHp = 0;		//»ı¸í·Â
-	m_dwExp = 0;	//°æÇèÄ¡
+	m_dwBPos = 0;   //í”Œë ˆì´ì–´ ì´ì „ ìœ„ì¹˜
+	m_dwPos = 0;	//í”Œë ˆì´ì–´ ìœ„ì¹˜          
+	m_byLevel = 0;	//ë ˆë²¨
+	m_byStr = 0;	//ê³µê²©ë ¥
+	m_byDur = 0;	//ë°©ì–´ë ¥
+	m_dwHp = 0;		//ìƒëª…ë ¥
+	m_dwExp = 0;	//ê²½í—˜ì¹˜
 	m_byArea = 0xFF;
 	m_bIsConfirm = false; 
 }
 
-//Å×½ºÆ®¸¦ À§ÇØ Á¤º¸¸¦ ÀÓ½Ã·Î Ã¤¿î´Ù.
+//í…ŒìŠ¤íŠ¸ë¥¼ ìœ„í•´ ì •ë³´ë¥¼ ì„ì‹œë¡œ ì±„ìš´ë‹¤.
 void cPlayer::SetTempPlayInfo()
 {
 	sprintf( m_szId , "player%d" , m_dwPKey );
-	sprintf( m_szNickName , "°­±º%d" , m_dwPKey );
-	sprintf( m_szName , "È«±æµ¿%d" , m_dwPKey );
+	sprintf( m_szNickName , "ê°•êµ°%d" , m_dwPKey );
+	sprintf( m_szName , "í™ê¸¸ë™%d" , m_dwPKey );
 	
 	m_dwPos = rand() % 3600 + 1;
 	m_byLevel = rand() % 10 + 1;

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class cPlayer
 {
@@ -14,16 +14,16 @@ public:
 	inline void SetArea( BYTE byArea ) { m_byArea = byArea; }
 	inline bool GetIsDead() { return m_bIsDead; }
 	inline void SetIsDead( bool bIsDead ) { m_bIsDead = bIsDead; }
-	//º¯¼ö¸¦ ÃÊ±âÈ­ ½ÃÅ²´Ù.
+	//ë³€ìˆ˜ë¥¼ ì´ˆê¸°í™” ì‹œí‚¨ë‹¤.
 	void Init();
 	
 
 
 private:
-	//Ä³¸¯ÅÍÀÇ ±âº» ¼Ó¼º
-	DWORD	m_dwPKey;	//ÇÃ·¹ÀÌ¾î °íÀ¯ ¹øÈ£
-	DWORD	m_dwPos;	//ÇÃ·¹ÀÌ¾î ÇöÀç À§Ä¡          
-	bool	m_bIsDead;	//Á×¾ú´ÂÁö ÆÇ´Ü
-	BYTE	m_byArea;	//¿µ¿ª
+	//ìºë¦­í„°ì˜ ê¸°ë³¸ ì†ì„±
+	DWORD	m_dwPKey;	//í”Œë ˆì´ì–´ ê³ ìœ  ë²ˆí˜¸
+	DWORD	m_dwPos;	//í”Œë ˆì´ì–´ í˜„ì¬ ìœ„ì¹˜          
+	bool	m_bIsDead;	//ì£½ì—ˆëŠ”ì§€ íŒë‹¨
+	BYTE	m_byArea;	//ì˜ì—­
 
 };

@@ -1,4 +1,4 @@
-// OverlappedCallbackDlg.h : Çì´õ ÆÄÀÏ
+ï»¿// OverlappedCallbackDlg.h : í—¤ë” íŒŒì¼
 //
 
 #pragma once
@@ -6,29 +6,29 @@
 #include "resource.h"
 #include "cOverlappedCallback.h"
 
-// COverlappedCallbackDlg ´ëÈ­ »óÀÚ
+// COverlappedCallbackDlg ëŒ€í™” ìƒì
 class COverlappedCallbackDlg : public CDialog
 {
-// »ı¼º
+// ìƒì„±
 public:
-	COverlappedCallbackDlg(CWnd* pParent = NULL);	// Ç¥ÁØ »ı¼ºÀÚ
+	COverlappedCallbackDlg(CWnd* pParent = NULL);	// í‘œì¤€ ìƒì„±ì
 
-// ´ëÈ­ »óÀÚ µ¥ÀÌÅÍ
+// ëŒ€í™” ìƒì ë°ì´í„°
 	enum { IDD = IDD_OVERLAPPEDCALLBACK_DIALOG };
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV Áö¿ø
+	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV ì§€ì›
 
 
 public:
-		//Ãâ·Â ¸Ş¼¼Áö
+		//ì¶œë ¥ ë©”ì„¸ì§€
 	void OutputMsg( char *szOutputString , ... );
 
-// ±¸Çö
+// êµ¬í˜„
 protected:
 	HICON m_hIcon;
 
-	// ¸Ş½ÃÁö ¸Ê ÇÔ¼ö¸¦ »ı¼ºÇß½À´Ï´Ù.
+	// ë©”ì‹œì§€ ë§µ í•¨ìˆ˜ë¥¼ ìƒì„±í–ˆìŠµë‹ˆë‹¤.
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
@@ -37,9 +37,9 @@ protected:
 public:
 	//overlapped i/o class
 	cOverlappedCallback	m_OverlappedCallback;
-	//¸Ş¼¼Áö¸¦ Ãâ·ÂÇÏ±â À§ÇØ ¸¸µç ¸®½ºÆ® ¹Ú½º ÄÁÆ®·Ñ
+	//ë©”ì„¸ì§€ë¥¼ ì¶œë ¥í•˜ê¸° ìœ„í•´ ë§Œë“  ë¦¬ìŠ¤íŠ¸ ë°•ìŠ¤ ì»¨íŠ¸ë¡¤
 	CListBox m_ctOutput;
-	//¼ÒÄÏ ¹öÆÛ
+	//ì†Œì¼“ ë²„í¼
 	char	 m_szSocketBuf[ MAX_SOCKBUF ];
 	
 	

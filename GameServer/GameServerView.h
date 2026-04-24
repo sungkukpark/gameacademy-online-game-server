@@ -1,4 +1,4 @@
-// GameServerView.h : iCGameServerView Å¬·¡½ºÀÇ ÀÎÅÍÆäÀÌ½º
+ï»¿// GameServerView.h : iCGameServerView í´ë˜ìŠ¤ì˜ ì¸í„°í˜ì´ìŠ¤
 //
 
 
@@ -7,27 +7,27 @@
 
 class CGameServerView : public CView
 {
-protected: // serialization¿¡¼­¸¸ ¸¸µé¾îÁı´Ï´Ù.
+protected: // serializationì—ì„œë§Œ ë§Œë“¤ì–´ì§‘ë‹ˆë‹¤.
 	CGameServerView();
 	DECLARE_DYNCREATE(CGameServerView)
 
-// Æ¯¼º
+// íŠ¹ì„±
 public:
 	CGameServerDoc* GetDocument() const;
 
-// ÀÛ¾÷
+// ì‘ì—…
 public:
 
-// ÀçÁ¤ÀÇ
+// ì¬ì •ì˜
 	public:
-	virtual void OnDraw(CDC* pDC);  // ÀÌ ºä¸¦ ±×¸®±â À§ÇØ ÀçÁ¤ÀÇµÇ¾ú½À´Ï´Ù.
+	virtual void OnDraw(CDC* pDC);  // ì´ ë·°ë¥¼ ê·¸ë¦¬ê¸° ìœ„í•´ ì¬ì •ì˜ë˜ì—ˆìŠµë‹ˆë‹¤.
 virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 protected:
 	virtual BOOL OnPreparePrinting(CPrintInfo* pInfo);
 	virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
 	virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
 
-// ±¸Çö
+// êµ¬í˜„
 public:
 	virtual ~CGameServerView();
 #ifdef _DEBUG
@@ -37,12 +37,12 @@ public:
 
 protected:
 
-// ¸Ş½ÃÁö ¸Ê ÇÔ¼ö¸¦ »ı¼ºÇß½À´Ï´Ù.
+// ë©”ì‹œì§€ ë§µ í•¨ìˆ˜ë¥¼ ìƒì„±í–ˆìŠµë‹ˆë‹¤.
 protected:
 	DECLARE_MESSAGE_MAP()
 };
 
-#ifndef _DEBUG  // GameServerView.cppÀÇ µğ¹ö±× ¹öÀü
+#ifndef _DEBUG  // GameServerView.cppì˜ ë””ë²„ê·¸ ë²„ì „
 inline CGameServerDoc* CGameServerView::GetDocument() const
    { return reinterpret_cast<CGameServerDoc*>(m_pDocument); }
 #endif

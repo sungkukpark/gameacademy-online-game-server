@@ -1,4 +1,4 @@
-// MsgViewFromLog.cpp : implementation file
+ï»¿// MsgViewFromLog.cpp : implementation file
 //
 #include "stdafx.h"
 #include "GameServer.h"
@@ -87,12 +87,12 @@ int CMsgViewFromLog::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	CListCtrl& listCtl = GetListCtrl();
 	if ( !IsWindow( listCtl.GetSafeHwnd() ) )	return -1;
 	m_pListCtrl = &listCtl;
-	listCtl.InsertColumn( 0,"½Ã°£",LVCFMT_LEFT,150 );
-	listCtl.InsertColumn( 1,"Á¾·ù",LVCFMT_LEFT,50 );
-	listCtl.InsertColumn( 2,"µî±Þ",LVCFMT_LEFT,130 );
-	listCtl.InsertColumn( 3,"¹ÞÀº°÷",LVCFMT_LEFT,100 );
-	listCtl.InsertColumn( 4,"À§Ä¡",LVCFMT_LEFT,200 );
-	listCtl.InsertColumn( 5,"¸Þ¼¼Áö",LVCFMT_LEFT,700 );
+	listCtl.InsertColumn( 0,"ì‹œê°„",LVCFMT_LEFT,150 );
+	listCtl.InsertColumn( 1,"ì¢…ë¥˜",LVCFMT_LEFT,50 );
+	listCtl.InsertColumn( 2,"ë“±ê¸‰",LVCFMT_LEFT,130 );
+	listCtl.InsertColumn( 3,"ë°›ì€ê³³",LVCFMT_LEFT,100 );
+	listCtl.InsertColumn( 4,"ìœ„ì¹˜",LVCFMT_LEFT,200 );
+	listCtl.InsertColumn( 5,"ë©”ì„¸ì§€",LVCFMT_LEFT,700 );
 	
 	listCtl.SendMessage( LVM_SETEXTENDEDLISTVIEWSTYLE,
 						LVS_EX_FULLROWSELECT |
@@ -121,12 +121,12 @@ void	__fastcall CMsgViewFromLog::OutputDebugMsg( enumLogInfoType eLogInfoType , 
 {
 	
 	int nCount = m_pListCtrl->GetItemCount();
-	//ÃÖ´ë ¶óÀÎ¼ö°¡ ³Ñ¾ú´Ù¸é ÃÊ±âÈ­
+	//ìµœëŒ€ ë¼ì¸ìˆ˜ê°€ ë„˜ì—ˆë‹¤ë©´ ì´ˆê¸°í™”
 	if( nCount >= MAX_LINES )
 	{
 		m_pListCtrl->DeleteAllItems();
 	}
-	//¹Ì¸® ºó°ø°£À» ÀÔ·ÂÇØµÐ´Ù
+	//ë¯¸ë¦¬ ë¹ˆê³µê°„ì„ ìž…ë ¥í•´ë‘”ë‹¤
 	LVITEM lvItem;
 	lvItem.mask = LVIF_IMAGE | LVIF_TEXT;
 	lvItem.state = 0;
@@ -137,7 +137,7 @@ void	__fastcall CMsgViewFromLog::OutputDebugMsg( enumLogInfoType eLogInfoType , 
 	lvItem.iSubItem = 0;
 	lvItem.iImage = 0;
 
-	//¸¸¾à ¿¡·¯°¡ ¾Æ´Ï¶ó¸é ¾ÆÀÌÄÜÀ» Á¤º¸·Î ¹Ù²Û´Ù.
+	//ë§Œì•½ ì—ëŸ¬ê°€ ì•„ë‹ˆë¼ë©´ ì•„ì´ì½˜ì„ ì •ë³´ë¡œ ë°”ê¾¼ë‹¤.
 	if( eLogInfoType < LOG_ERROR_LOW )
 		lvItem.iImage = 1;
 

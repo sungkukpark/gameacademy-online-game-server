@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "cPlayer.h"
 #include "cDetectNpc.h"
 class cPlayerManager : public cSingleton , cMonitor

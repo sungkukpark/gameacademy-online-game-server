@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+ï»¿#include "StdAfx.h"
 #include ".\ciocpnpcserver.h"
 #include "cProcessPacket.h"
 
@@ -29,18 +29,18 @@ void cIocpNpcServer::InitProcessFunc()
 	m_FuncProcess[ NPC_DeadPlayer_Cn  % MAX_PROCESSFUNC ].funcProcessPacket = cProcessPacket::fnNPCDeadPlayerCn;
 }
 
-//client°¡ Á¢¼Ó ¼ö¶ôÀÌ µÇ¾úÀ» ¶§ È£ÃâµÇ´Â ÇÔ¼ö
+//clientê°€ ì ‘ì† ìˆ˜ë½ì´ ë˜ì—ˆì„ ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
 bool cIocpNpcServer::OnAccept( cConnection *lpConnection )
 {
 	ConnectionManager()->AddConnection( lpConnection );
 	LOG( LOG_INFO_LOW , 
-		"SYSTEM | cIocpNpcServer::OnAccept() | IP[%s] Socket[%d] Á¢¼Ó Connection Cnt[%d]",
+		"SYSTEM | cIocpNpcServer::OnAccept() | IP[%s] Socket[%d] ì ‘ì† Connection Cnt[%d]",
 		lpConnection->GetConnectionIp(), lpConnection->GetSocket() ,
 		ConnectionManager()->GetConnectionCnt() );
 	return true;
 }
 
-//client¿¡¼­ packetÀÌ µµÂøÇßÀ» ¶§ ¼ø¼­ ¼º ÀÖ°Ô Ã³¸®µÇ¾îÁö´Â ÆĞÅ¶Ã³¸®
+//clientì—ì„œ packetì´ ë„ì°©í–ˆì„ ë•Œ ìˆœì„œ ì„± ìˆê²Œ ì²˜ë¦¬ë˜ì–´ì§€ëŠ” íŒ¨í‚·ì²˜ë¦¬
 bool cIocpNpcServer::OnRecv(cConnection* lpConnection,  DWORD dwSize , char* pRecvedMsg)
 {
 	unsigned short usType;
@@ -48,7 +48,7 @@ bool cIocpNpcServer::OnRecv(cConnection* lpConnection,  DWORD dwSize , char* pRe
 	unsigned short usTempType = usType % MAX_PROCESSFUNC;
 	if( usTempType < 0 || usTempType > MAX_PROCESSFUNC || NULL == m_FuncProcess[ usTempType ].funcProcessPacket )
 	{
-		LOG( LOG_ERROR_NORMAL , "SYSTEM | cIocpNpcServer::OnRecv() | Á¤ÀÇµÇÁö ¾ÊÀº ÆĞÅ¶(%d)",
+		LOG( LOG_ERROR_NORMAL , "SYSTEM | cIocpNpcServer::OnRecv() | ì •ì˜ë˜ì§€ ì•Šì€ íŒ¨í‚·(%d)",
 			usType );
 		return true;
 	}
@@ -56,21 +56,21 @@ bool cIocpNpcServer::OnRecv(cConnection* lpConnection,  DWORD dwSize , char* pRe
 	return true;
 }
 
-//client¿¡¼­ packetÀÌ µµÂøÇßÀ» ¶§ ¼ø¼­ ¼º ¾øÀÌ °ğ¹Ù·Î Ã³¸® µÇ´Â ÆĞÅ¶Ã³¸®
+//clientì—ì„œ packetì´ ë„ì°©í–ˆì„ ë•Œ ìˆœì„œ ì„± ì—†ì´ ê³§ë°”ë¡œ ì²˜ë¦¬ ë˜ëŠ” íŒ¨í‚·ì²˜ë¦¬
 bool cIocpNpcServer::OnRecvImmediately(cConnection* lpConnection,  DWORD dwSize , char* pRecvedMsg)
 {
 	/////////////////////////////////////////////////////////////////
-	//ÆĞÅ¶ÀÌ Ã³¸®µÇ¸é return true; Ã³¸® µÇÁö ¾Ê¾Ò´Ù¸é return false;
+	//íŒ¨í‚·ì´ ì²˜ë¦¬ë˜ë©´ return true; ì²˜ë¦¬ ë˜ì§€ ì•Šì•˜ë‹¤ë©´ return false;
 	return false;
 }
 
-//client¿Í ¿¬°áÀÌ Á¾·áµÇ¾úÀ» ¶§ È£ÃâµÇ´Â ÇÔ¼ö
+//clientì™€ ì—°ê²°ì´ ì¢…ë£Œë˜ì—ˆì„ ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
 void cIocpNpcServer::OnClose(cConnection* lpConnection)
 {
-	//ÇÃ·¹ÀÌ¾î¸¦ °ü¸® ¸ñ·Ï¿¡¼­ »èÁ¦ÇÑ´Ù.
+	//í”Œë ˆì´ì–´ë¥¼ ê´€ë¦¬ ëª©ë¡ì—ì„œ ì‚­ì œí•œë‹¤.
 	ConnectionManager()->RemoveConnection( lpConnection );
 	LOG( LOG_INFO_LOW , 
-		"SYSTEM | cIocpNpcServer::OnClose() | IP[%s] Socket[%d] Á¾·á Connection Cnt[%d]",
+		"SYSTEM | cIocpNpcServer::OnClose() | IP[%s] Socket[%d] ì¢…ë£Œ Connection Cnt[%d]",
 		lpConnection->GetConnectionIp(), lpConnection->GetSocket() ,
 		ConnectionManager()->GetConnectionCnt());
 }
@@ -92,28 +92,28 @@ bool cIocpNpcServer::OnSystemMsg( cConnection* lpConnection , DWORD dwMsgType , 
 	return true;
 }
 
-//iniÈ­ÀÏ¿¡¼­ ½ºÆ®¸µÀ» ÀĞ¾î¿À´Â ÇÔ¼ö
+//inií™”ì¼ì—ì„œ ìŠ¤íŠ¸ë§ì„ ì½ì–´ì˜¤ëŠ” í•¨ìˆ˜
 int cIocpNpcServer::GetINIString( char* szOutStr , char* szAppName , char* szKey ,int nSize , char* szFileName )
 {
 	int ret = GetPrivateProfileString( szAppName  , szKey  , "" , szOutStr , nSize , szFileName);
 	if( 0 == ret )
 	{
 		char szTemp[ 300 ];
-		sprintf( szTemp , "[%s]Config File¿¡ [%s]-[%s]Ç×¸ñÀº Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.", szFileName , szAppName ,szKey );
+		sprintf( szTemp , "[%s]Config Fileì— [%s]-[%s]í•­ëª©ì€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.", szFileName , szAppName ,szKey );
 		AfxMessageBox( szTemp );
 		return -1;
 	}
 	return 0;
 }
 
-//iniÈ­ÀÏ¿¡¼­ ¼ıÀÚ¸¦ ÀĞ¾î¿À´Â ÇÔ¼ö
+//inií™”ì¼ì—ì„œ ìˆ«ìë¥¼ ì½ì–´ì˜¤ëŠ” í•¨ìˆ˜
 int	cIocpNpcServer::GetINIInt( char* szAppName , char* szKey , char* szFileName )
 {
 	int ret = GetPrivateProfileInt( szAppName , szKey  , -1 ,  szFileName );
 	if( ret < 0 )
 	{
 		char szTemp[ 300 ];
-		sprintf( szTemp , "[%s]Config File¿¡ [%s]-[%s]Ç×¸ñÀº Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.",
+		sprintf( szTemp , "[%s]Config Fileì— [%s]-[%s]í•­ëª©ì€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.",
 			szFileName , szAppName ,szKey );
 		AfxMessageBox( szTemp );
 	}
@@ -128,13 +128,13 @@ bool cIocpNpcServer::ServerStart()
 	if( -1 == GetINIString( m_szLogFileName , BASE_SERVER  , "LOGFILE"  ,  100 , INIFILE_NAME ) )
 		return false;
 
-	//¼­¹ö Á¤º¸ ÃÊ±âÈ­
+	//ì„œë²„ ì •ë³´ ì´ˆê¸°í™”
 	INITCONFIG initConfig;
 	CString		szLogName;	
 	int nMaxConnectionCnt = 0;
 
 	//////////////////////////////////////////////////////////////////
-	//·Î±× ÃÊ±âÈ­
+	//ë¡œê·¸ ì´ˆê¸°í™”
 	sLogConfig LogConfig;
 	strncpy( LogConfig.s_szLogFileName , m_szLogFileName , MAX_FILENAME_LENGTH );
 	LogConfig.s_nLogInfoTypes[ STORAGE_OUTPUTWND ] = LOG_ALL;
@@ -165,25 +165,25 @@ bool cIocpNpcServer::ServerStart()
 		return false;
 	
 	
-	LOG( LOG_INFO_NORMAL , "SYSTEM |  ·Î±× ½Ã½ºÅÛ ½ÃÀÛ | ====================================================================== ");
+	LOG( LOG_INFO_NORMAL , "SYSTEM |  ë¡œê·¸ ì‹œìŠ¤í…œ ì‹œì‘ | ====================================================================== ");
 	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_LogFileName] %s", m_szLogFileName );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Queue] Process Pakcet °³¼ö : %d", initConfig.nProcessPacketCnt );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Buffer] Send Buffer °³¼ö : %d ", initConfig.nSendBufCnt );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Buffer] Recv Buffer °³¼ö : %d ", initConfig.nRecvBufCnt );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Buffer] Send Buffer Å©±â : %d ", initConfig.nSendBufSize );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Buffer] Recv Buffer Å©±â : %d ", initConfig.nRecvBufSize );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Buffer] Send ÃÑ ÇÒ´ç ¹öÆÛ: %d ", initConfig.nSendBufSize * initConfig.nSendBufCnt );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Buffer] Recv ÃÑ ÇÒ´ç ¹öÆÛ: %d ", initConfig.nRecvBufSize * initConfig.nRecvBufCnt );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Connection] Á¢¼ÓÇÒ¼ö ÀÖ´Â ÃÖ´ë ¼ö : %d", nMaxConnectionCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Queue] Process Pakcet ê°œìˆ˜ : %d", initConfig.nProcessPacketCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Buffer] Send Buffer ê°œìˆ˜ : %d ", initConfig.nSendBufCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Buffer] Recv Buffer ê°œìˆ˜ : %d ", initConfig.nRecvBufCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Buffer] Send Buffer í¬ê¸° : %d ", initConfig.nSendBufSize );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Buffer] Recv Buffer í¬ê¸° : %d ", initConfig.nRecvBufSize );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Buffer] Send ì´ í• ë‹¹ ë²„í¼: %d ", initConfig.nSendBufSize * initConfig.nSendBufCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Buffer] Recv ì´ í• ë‹¹ ë²„í¼: %d ", initConfig.nRecvBufSize * initConfig.nRecvBufCnt );
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Connection] ì ‘ì†í• ìˆ˜ ìˆëŠ” ìµœëŒ€ ìˆ˜ : %d", nMaxConnectionCnt );
 	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Connection] Server Binding Port : %d", initConfig.nServerPort );
 	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Thread] WorkerThread Cnt : %d", initConfig.nWorkerThreadCnt );
 	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | [Base_Thread] Process WorkerThread Cnt : %d", initConfig.nProcessThreadCnt );
 	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | NpcServer Start.." );
-	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | ¼­¹ö ½ÃÀÛ ½Ã°£ :  %d³â%d¿ù%dÀÏ%d½Ã%dºĞ%dÃÊ",
+	LOG( LOG_INFO_NORMAL , "SYSTEM | cIocpNpcServer::ServerStart() | ì„œë²„ ì‹œì‘ ì‹œê°„ :  %dë…„%dì›”%dì¼%dì‹œ%dë¶„%dì´ˆ",
 		time.GetYear(),time.GetMonth(),time.GetDay(), time.GetHour(),time.GetMinute(),time.GetSecond() );
 
 	sprintf(szOutStr 
-		,"[%d³â%d¿ù%dÀÏ%d½Ã%dºĞ%dÃÊ] NpcServer Start..."
+		,"[%dë…„%dì›”%dì¼%dì‹œ%dë¶„%dì´ˆ] NpcServer Start..."
 		,time.GetYear(),time.GetMonth(),time.GetDay(),
 		time.GetHour(),time.GetMinute(),time.GetSecond() );
 
@@ -194,7 +194,7 @@ bool cIocpNpcServer::ServerStart()
 		return false;
 
 	PlayerManager()->CreatePlayer( 100 );
-	//0.5 tickÀ¸·Î thread ½ÃÀÛ
+	//0.5 tickìœ¼ë¡œ thread ì‹œì‘
 	m_pTickThread->CreateThread( SERVER_TICK );
 	m_pTickThread->Run();
 	return true;

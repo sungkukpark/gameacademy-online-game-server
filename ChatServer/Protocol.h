@@ -1,4 +1,4 @@
-#define MAX_CHATMSG 300
+﻿#define MAX_CHATMSG 300
 #define MAX_IP		20
 
 enum ePacket{

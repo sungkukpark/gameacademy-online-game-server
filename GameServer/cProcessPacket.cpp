@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+ï»¿#include "StdAfx.h"
 #include ".\cprocesspacket.h"
 
 cProcessPacket::cProcessPacket(void)
@@ -11,30 +11,30 @@ cProcessPacket::~cProcessPacket(void)
 
 void cProcessPacket::fnLoginPlayerRq( cPlayer* pPlayer,  DWORD dwSize , char* pRecvedMsg )
 {
-	//ÇÃ·¹ÀÌ¾î ÀÎÁõ
+	//í”Œë ˆì´ì–´ ì¸ì¦
 	pPlayer->SetIsConfirm( true );
-	//ÇÃ·¹ÀÌ¾î Ãß°¡
+	//í”Œë ˆì´ì–´ ì¶”ê°€
 	PlayerManager()->AddPlayer( pPlayer );
-	//ÇÃ·¹ÀÌ¾î ÀÓ½Ã Á¤º¸ ¼³Á¤
+	//í”Œë ˆì´ì–´ ìž„ì‹œ ì •ë³´ ì„¤ì •
 	pPlayer->SetTempPlayInfo();
 	//////////////////////////////////////////////////////////
-	//ÇÃ·¹ÀÌ¾î Á¤º¸ Á¢¼ÓµÈ Å¬¶óÀÌ¾ðÆ®¿¡ Àü¼Û
+	//í”Œë ˆì´ì–´ ì •ë³´ ì ‘ì†ëœ í´ë¼ì´ì–¸íŠ¸ì— ì „ì†¡
 	pPlayer->Send_PlayerInfo();
 	
 	///////////////////////////////////////////////////////////
-	//°ÔÀÓ ¿ùµå¿¡ Á¢¼ÓµÇ¾îÀÖ´Â ÇÃ·¹ÀÌ¾îµé Á¤º¸¸¦ Á¢¼ÓÇÑ ÇÃ·¹ÀÌ¾î¿¡°Ô Àü¼Û
+	//ê²Œìž„ ì›”ë“œì— ì ‘ì†ë˜ì–´ìžˆëŠ” í”Œë ˆì´ì–´ë“¤ ì •ë³´ë¥¼ ì ‘ì†í•œ í”Œë ˆì´ì–´ì—ê²Œ ì „ì†¡
 	PlayerManager()->Send_WorldPlayerInfosToConnectPlayer( pPlayer );
 
 	///////////////////////////////////////////////////////////
-	//°ÔÀÓ ¿ùµå¿¡ Á¢¼ÓµÇ¾îÀÖ´Â ÇÃ·¹ÀÌ¾îµé¿¡°Ô Á¢¼ÓÇÑ ÇÃ·¹ÀÌ¾îÀÇ Á¤º¸ Àü¼Û
+	//ê²Œìž„ ì›”ë“œì— ì ‘ì†ë˜ì–´ìžˆëŠ” í”Œë ˆì´ì–´ë“¤ì—ê²Œ ì ‘ì†í•œ í”Œë ˆì´ì–´ì˜ ì •ë³´ ì „ì†¡
 	PlayerManager()->Send_LoginPlayer( pPlayer );
 
 	LOG( LOG_INFO_LOW , 
-		"SYSTEM | cIocpGameServer::fnLoginAq() | °³ÀÎÅ°(%d) ·Î±ä , ÇöÀç ÇÃ·¹ÀÌ¾î ¼ö(%d)"
+		"SYSTEM | cIocpGameServer::fnLoginAq() | ê°œì¸í‚¤(%d) ë¡œê¸´ , í˜„ìž¬ í”Œë ˆì´ì–´ ìˆ˜(%d)"
 		, pPlayer->GetPKey() , PlayerManager()->GetPlayerCnt() );
 
 	///////////////////////////////////////////////////////////
-	//Npc¼­¹ö¿¡ ÇÃ·¹ÀÌ¾î°¡ ·Î±×ÀÎ Çß´Ù´Â °ÍÀ» ¾Ë¸°´Ù.
+	//Npcì„œë²„ì— í”Œë ˆì´ì–´ê°€ ë¡œê·¸ì¸ í–ˆë‹¤ëŠ” ê²ƒì„ ì•Œë¦°ë‹¤.
 	cConnection* pNpcConn = IocpGameServer()->GetNpcServerConn();
 	if( NULL == pNpcConn )
 		return;
@@ -52,19 +52,19 @@ void cProcessPacket::fnMovePlayerCn( cPlayer* pPlayer,  DWORD dwSize , char* pRe
 {
 	MovePlayerCn* pMove = (MovePlayerCn*)pRecvedMsg;
 	LOG( LOG_INFO_LOW , 
-		"SYSTEM | cIocpGameServer::fnMovePlayerCn() | °³ÀÎÅ°(%d) ÀÌµ¿ : (%d) -> (%d)"
+		"SYSTEM | cIocpGameServer::fnMovePlayerCn() | ê°œì¸í‚¤(%d) ì´ë™ : (%d) -> (%d)"
 		, pPlayer->GetPKey() , pMove->s_dwCPos , pMove->s_dwTPos );
 	pPlayer->SetBPos( pMove->s_dwCPos );
 	pPlayer->SetPos( pMove->s_dwTPos );
 	
 	bool bRet = AreaManager()->TransAreaPlayer( pPlayer );
 	AreaManager()->Send_MovePlayerToActiveAreas( pPlayer );
-	//ÇöÀç ÇÃ·¹ÀÌ¾î°¡ ´Ù¸¥ Áö¿ªÀ¸·Î ÀÌµ¿ÇÏ¿´´Ù¸é
+	//í˜„ìž¬ í”Œë ˆì´ì–´ê°€ ë‹¤ë¥¸ ì§€ì—­ìœ¼ë¡œ ì´ë™í•˜ì˜€ë‹¤ë©´
 	if( true == bRet )
 		AreaManager()->Send_MovePlayerToInActiveAreas( pPlayer );
 
 	///////////////////////////////////////////////////////////
-	//Npc¼­¹ö¿¡ ÇÃ·¹ÀÌ¾î°¡ ÀÌµ¿ Çß´Ù´Â °ÍÀ» ¾Ë¸°´Ù.
+	//Npcì„œë²„ì— í”Œë ˆì´ì–´ê°€ ì´ë™ í–ˆë‹¤ëŠ” ê²ƒì„ ì•Œë¦°ë‹¤.
 	cConnection* pNpcConn = IocpGameServer()->GetNpcServerConn();
 	if( NULL == pNpcConn )
 		return;
@@ -81,7 +81,7 @@ void cProcessPacket::fnMovePlayerCn( cPlayer* pPlayer,  DWORD dwSize , char* pRe
 void cProcessPacket::fnKeepAliveCn( cPlayer* pPlayer,  DWORD dwSize , char* pRecvedMsg )
 {
 	LOG( LOG_INFO_LOW , 
-		"SYSTEM | cIocpGameServer::fnKeepAliveCn() | °³ÀÎÅ°(%d) KeepAlive"
+		"SYSTEM | cIocpGameServer::fnKeepAliveCn() | ê°œì¸í‚¤(%d) KeepAlive"
 		, pPlayer->GetPKey() );
 
 	pPlayer->SetKeepAliveTick( IocpGameServer()->GetServerTick() );
@@ -91,7 +91,7 @@ void cProcessPacket::fnNPCNpcInfoVSn( cPlayer* pPlayer,  DWORD dwSize , char* pR
 {
 	cConnection* pConnection = (cConnection*)pPlayer;
 	LOG( LOG_INFO_LOW , 
-		"SYSTEM | cIocpGameServer::fnNPCNpcInfoSn() | NPC Á¤º¸¸¦ ¹ÞÀ½" );
+		"SYSTEM | cIocpGameServer::fnNPCNpcInfoSn() | NPC ì •ë³´ë¥¼ ë°›ìŒ" );
 	PlayerManager()->Send_RecvBufferFromNpcServer( pRecvedMsg, dwSize );
 }
 
@@ -99,7 +99,7 @@ void cProcessPacket::fnNPCUpdateNpcVSn( cPlayer* pPlayer,  DWORD dwSize , char* 
 {
 	cConnection* pConnection = (cConnection*)pPlayer;
 	LOG( LOG_INFO_LOW , 
-		"SYSTEM | cIocpGameServer::fnNPCUpdateNpcVSn() | NPC °»½Å Á¤º¸¸¦ ¹ÞÀ½" );
+		"SYSTEM | cIocpGameServer::fnNPCUpdateNpcVSn() | NPC ê°±ì‹  ì •ë³´ë¥¼ ë°›ìŒ" );
 	PlayerManager()->Send_RecvBufferFromNpcServer( pRecvedMsg, dwSize );
 
 }
@@ -107,7 +107,7 @@ void cProcessPacket::fnNPCUpdateNpcVSn( cPlayer* pPlayer,  DWORD dwSize , char* 
 void cProcessPacket::fnNPCAttackNpcToPlayerSn( cPlayer* pPlayer,  DWORD dwSize , char* pRecvedMsg )
 {
 	LOG( LOG_INFO_LOW , 
-		"SYSTEM | cIocpGameServer::fnNPCUpdateNpcVSn() | NPC°¡ ÇÃ·¹ÀÌ¾î °ø°Ý" );
+		"SYSTEM | cIocpGameServer::fnNPCUpdateNpcVSn() | NPCê°€ í”Œë ˆì´ì–´ ê³µê²©" );
 	cConnection* pConnection = (cConnection*)pPlayer;
 	NPCAttackNpcToPlayerSn* pAttackNpc = (NPCAttackNpcToPlayerSn*)pRecvedMsg;
 	cPlayer* pAttackedPlayer = PlayerManager()->FindPlayer( pAttackNpc->s_dwPKey );
