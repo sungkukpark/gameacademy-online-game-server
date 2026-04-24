@@ -16,6 +16,7 @@ void InitConsoleEncoding()
 int main( int argc, char* argv[] )
 {
 	InitConsoleEncoding();
+
 	if( argc < 2 )
 	{
 		cout<<"usage : client.exe [ option : [ /server ][ /client ] ]"<<endl;
