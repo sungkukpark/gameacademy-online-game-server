@@ -7,8 +7,15 @@ using namespace std;
 #include <windows.h>
 #include <process.h>
 
+void InitConsoleEncoding()
+{
+	SetConsoleOutputCP(CP_UTF8);
+	SetConsoleCP(CP_UTF8);
+}
+
 int main( int argc, char* argv[] )
 {
+	InitConsoleEncoding();
 	if( argc < 2 )
 	{
 		cout<<"usage : client.exe [ option : [ /server ][ /client ] ]"<<endl;
